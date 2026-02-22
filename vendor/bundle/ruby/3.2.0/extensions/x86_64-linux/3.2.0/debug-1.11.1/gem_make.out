@@ -1,0 +1,19 @@
+current directory: /home/user_ayasong0/private/Essential-Oil-app/vendor/bundle/ruby/3.2.0/gems/debug-1.11.1/ext/debug
+/home/user_ayasong0/.rbenv/versions/3.2.3/bin/ruby extconf.rb
+creating Makefile
+
+current directory: /home/user_ayasong0/private/Essential-Oil-app/vendor/bundle/ruby/3.2.0/gems/debug-1.11.1/ext/debug
+make DESTDIR\= sitearchdir\=./.gem.20260222-97462-vrbile sitelibdir\=./.gem.20260222-97462-vrbile clean
+
+current directory: /home/user_ayasong0/private/Essential-Oil-app/vendor/bundle/ruby/3.2.0/gems/debug-1.11.1/ext/debug
+make DESTDIR\= sitearchdir\=./.gem.20260222-97462-vrbile sitelibdir\=./.gem.20260222-97462-vrbile
+compiling debug.c
+compiling iseq_collector.c
+linking shared-object debug/debug.so
+
+current directory: /home/user_ayasong0/private/Essential-Oil-app/vendor/bundle/ruby/3.2.0/gems/debug-1.11.1/ext/debug
+make DESTDIR\= sitearchdir\=./.gem.20260222-97462-vrbile sitelibdir\=./.gem.20260222-97462-vrbile install
+/usr/bin/install -c -m 0755 debug.so ./.gem.20260222-97462-vrbile/debug
+
+current directory: /home/user_ayasong0/private/Essential-Oil-app/vendor/bundle/ruby/3.2.0/gems/debug-1.11.1/ext/debug
+make DESTDIR\= sitearchdir\=./.gem.20260222-97462-vrbile sitelibdir\=./.gem.20260222-97462-vrbile clean

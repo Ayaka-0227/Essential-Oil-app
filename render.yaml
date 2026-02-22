@@ -1,0 +1,25 @@
+services:
+  - type: web
+    name: essential-oil-app
+    env: ruby
+    plan: free
+    repo: ./
+    buildCommand: |
+      bundle install --deployment --without development test
+      RAILS_ENV=production bin/rails assets:precompile
+    startCommand: bundle exec puma -C config/puma.rb
+    # Optional: run migrations automatically on deploy
+    releaseCommand: bin/rails db:migrate
+    envVars:
+      - key: RAILS_ENV
+        value: production
+
+databases:
+  - name: essential-oil-db
+    engine: postgres
+    plan: free
+
+# Notes:
+# - Replace plan/repo/other fields as needed for your Render account.
+# - Do NOT commit secrets like `config/master.key`. Instead set `RAILS_MASTER_KEY`
+#   as an environment variable in Render settings.
