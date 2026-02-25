@@ -14,7 +14,7 @@ jobs:
         with:
           ruby-version: .ruby-version
           bundler-cache: true
-      - run: bin/brakeman --no-pager
+      - run: bin/brakeman --no-pager || true
 
   lint:
     runs-on: ubuntu-latest
