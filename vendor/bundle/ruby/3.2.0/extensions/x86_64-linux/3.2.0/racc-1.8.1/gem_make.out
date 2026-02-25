@@ -3,16 +3,16 @@ current directory: /home/user_ayasong0/private/Essential-Oil-app/vendor/bundle/r
 creating Makefile
 
 current directory: /home/user_ayasong0/private/Essential-Oil-app/vendor/bundle/ruby/3.2.0/gems/racc-1.8.1/ext/racc/cparse
-make DESTDIR\= sitearchdir\=./.gem.20260222-97462-vz9n3a sitelibdir\=./.gem.20260222-97462-vz9n3a clean
+make DESTDIR\= sitearchdir\=./.gem.20260225-58351-2136hl sitelibdir\=./.gem.20260225-58351-2136hl clean
 
 current directory: /home/user_ayasong0/private/Essential-Oil-app/vendor/bundle/ruby/3.2.0/gems/racc-1.8.1/ext/racc/cparse
-make DESTDIR\= sitearchdir\=./.gem.20260222-97462-vz9n3a sitelibdir\=./.gem.20260222-97462-vz9n3a
+make DESTDIR\= sitearchdir\=./.gem.20260225-58351-2136hl sitelibdir\=./.gem.20260225-58351-2136hl
 compiling cparse.c
 linking shared-object racc/cparse.so
 
 current directory: /home/user_ayasong0/private/Essential-Oil-app/vendor/bundle/ruby/3.2.0/gems/racc-1.8.1/ext/racc/cparse
-make DESTDIR\= sitearchdir\=./.gem.20260222-97462-vz9n3a sitelibdir\=./.gem.20260222-97462-vz9n3a install
-/usr/bin/install -c -m 0755 cparse.so ./.gem.20260222-97462-vz9n3a/racc
+make DESTDIR\= sitearchdir\=./.gem.20260225-58351-2136hl sitelibdir\=./.gem.20260225-58351-2136hl install
+/usr/bin/install -c -m 0755 cparse.so ./.gem.20260225-58351-2136hl/racc
 
 current directory: /home/user_ayasong0/private/Essential-Oil-app/vendor/bundle/ruby/3.2.0/gems/racc-1.8.1/ext/racc/cparse
-make DESTDIR\= sitearchdir\=./.gem.20260222-97462-vz9n3a sitelibdir\=./.gem.20260222-97462-vz9n3a clean
+make DESTDIR\= sitearchdir\=./.gem.20260225-58351-2136hl sitelibdir\=./.gem.20260225-58351-2136hl clean

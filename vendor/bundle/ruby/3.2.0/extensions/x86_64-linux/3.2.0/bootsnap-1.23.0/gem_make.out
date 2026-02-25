@@ -8,16 +8,16 @@ checking for whether -std=c99 is accepted as CFLAGS... yes
 creating Makefile
 
 current directory: /home/user_ayasong0/private/Essential-Oil-app/vendor/bundle/ruby/3.2.0/gems/bootsnap-1.23.0/ext/bootsnap
-make DESTDIR\= sitearchdir\=./.gem.20260222-97462-a2pqtw sitelibdir\=./.gem.20260222-97462-a2pqtw clean
+make DESTDIR\= sitearchdir\=./.gem.20260225-58351-vbm3a sitelibdir\=./.gem.20260225-58351-vbm3a clean
 
 current directory: /home/user_ayasong0/private/Essential-Oil-app/vendor/bundle/ruby/3.2.0/gems/bootsnap-1.23.0/ext/bootsnap
-make DESTDIR\= sitearchdir\=./.gem.20260222-97462-a2pqtw sitelibdir\=./.gem.20260222-97462-a2pqtw
+make DESTDIR\= sitearchdir\=./.gem.20260225-58351-vbm3a sitelibdir\=./.gem.20260225-58351-vbm3a
 compiling bootsnap.c
 linking shared-object bootsnap/bootsnap.so
 
 current directory: /home/user_ayasong0/private/Essential-Oil-app/vendor/bundle/ruby/3.2.0/gems/bootsnap-1.23.0/ext/bootsnap
-make DESTDIR\= sitearchdir\=./.gem.20260222-97462-a2pqtw sitelibdir\=./.gem.20260222-97462-a2pqtw install
-/usr/bin/install -c -m 0755 bootsnap.so ./.gem.20260222-97462-a2pqtw/bootsnap
+make DESTDIR\= sitearchdir\=./.gem.20260225-58351-vbm3a sitelibdir\=./.gem.20260225-58351-vbm3a install
+/usr/bin/install -c -m 0755 bootsnap.so ./.gem.20260225-58351-vbm3a/bootsnap
 
 current directory: /home/user_ayasong0/private/Essential-Oil-app/vendor/bundle/ruby/3.2.0/gems/bootsnap-1.23.0/ext/bootsnap
-make DESTDIR\= sitearchdir\=./.gem.20260222-97462-a2pqtw sitelibdir\=./.gem.20260222-97462-a2pqtw clean
+make DESTDIR\= sitearchdir\=./.gem.20260225-58351-vbm3a sitelibdir\=./.gem.20260225-58351-vbm3a clean
