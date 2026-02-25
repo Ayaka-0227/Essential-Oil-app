@@ -1,0 +1,25 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  stress: 1
+  anxiety: 1
+  fatigue: 1
+  sleep: 1
+  emotion: 1
+  vitality: 1
+  mood: 1
+  concentration: 1
+  recommended_oil: one
+
+two:
+  user: two
+  stress: 1
+  anxiety: 1
+  fatigue: 1
+  sleep: 1
+  emotion: 1
+  vitality: 1
+  mood: 1
+  concentration: 1
+  recommended_oil: two
