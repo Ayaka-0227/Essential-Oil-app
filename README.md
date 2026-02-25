@@ -323,7 +323,7 @@ Chart.js 4.4
 Devise 4.9
 
 - データベース  
-PostgreSQL15
+PostgreSQL18
 
 - デプロイ先  
 Render
