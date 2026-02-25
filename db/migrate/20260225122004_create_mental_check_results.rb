@@ -10,7 +10,7 @@ class CreateMentalCheckResults < ActiveRecord::Migration[8.0]
       t.integer :vitality
       t.integer :mood
       t.integer :concentration
-      t.references :recommended_oil, null: false, foreign_key: true
+      t.references :recommended_oil, null: true, foreign_key: { to_table: :aroma_oils }
 
       t.timestamps
     end

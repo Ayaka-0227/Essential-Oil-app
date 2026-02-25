@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2026_02_25_121424) do
+ActiveRecord::Schema[8.0].define(version: 2026_02_25_122004) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -19,6 +19,23 @@ ActiveRecord::Schema[8.0].define(version: 2026_02_25_121424) do
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "mental_check_results", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.integer "stress"
+    t.integer "anxiety"
+    t.integer "fatigue"
+    t.integer "sleep"
+    t.integer "emotion"
+    t.integer "vitality"
+    t.integer "mood"
+    t.integer "concentration"
+    t.bigint "recommended_oil_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["recommended_oil_id"], name: "index_mental_check_results_on_recommended_oil_id"
+    t.index ["user_id"], name: "index_mental_check_results_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -32,4 +49,7 @@ ActiveRecord::Schema[8.0].define(version: 2026_02_25_121424) do
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
+
+  add_foreign_key "mental_check_results", "aroma_oils", column: "recommended_oil_id"
+  add_foreign_key "mental_check_results", "users"
 end
