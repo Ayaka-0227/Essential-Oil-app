@@ -7,7 +7,6 @@ class Api::MentalCheckResultsController < ApplicationController
   private
 
   def mental_check_params
-    
     params.require(:mental_check_result).permit(
       :user_id,
       :stress,

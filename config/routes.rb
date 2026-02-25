@@ -13,6 +13,6 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "posts#index"
   namespace :api do
-    resources :mental_check_results, only: [:create, :show]
+    resources :mental_check_results, only: [ :create, :show ]
   end
 end
