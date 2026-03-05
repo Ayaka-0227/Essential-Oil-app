@@ -1,6 +1,8 @@
 class Api::MentalCheckResultsController < ApplicationController
+  before_action :authenticate_user!
+  
   def create
-    result = MentalCheckResult.create!(mental_check_params)
+    result = current_user.mental_check_results.create!(mental_check_params)
     render json: result
   end
 
@@ -8,7 +10,6 @@ class Api::MentalCheckResultsController < ApplicationController
 
   def mental_check_params
     params.require(:mental_check_result).permit(
-      :user_id,
       :stress,
       :anxiety,
       :fatigue,
