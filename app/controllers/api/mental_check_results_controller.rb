@@ -1,6 +1,11 @@
 class Api::MentalCheckResultsController < ApplicationController
   before_action :authenticate_user!
-  
+
+  def index
+    results = current_user.mental_check_results.order(created_at: :desc)
+    render json: results
+  end
+
   def create
     result = current_user.mental_check_results.create!(mental_check_params)
     render json: result
