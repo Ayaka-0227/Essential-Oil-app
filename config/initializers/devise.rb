@@ -200,7 +200,10 @@ Devise.setup do |config|
   # config.lock_strategy = :failed_attempts
 
   config.jwt do |jwt|
-    jwt.secret = Rails.application.credentials.devise_jwt_secret_key!
+    jwt.secret = ENV["DEVISE_JWT_SECRET_KEY"].presence ||
+      Rails.application.credentials.devise_jwt_secret_key.presence ||
+      ENV["SECRET_KEY_BASE"].presence ||
+      Rails.application.secret_key_base
     jwt.dispatch_requests = [
       [ "POST", %r{^/users/sign_in$} ]
     ]
