@@ -31,6 +31,8 @@ gem "solid_cache"
 gem "solid_queue"
 gem "solid_cable"
 
+gem "devise"
+
 # Reduces boot times through caching; required in config/boot.rb
 gem "bootsnap", require: false
 
@@ -42,6 +44,8 @@ gem "thruster", require: false
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
+
+gem "devise-jwt"
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
@@ -61,6 +65,7 @@ end
 
 group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
+  gem "minitest", "< 6"
   gem "capybara"
   gem "selenium-webdriver"
 end

@@ -7,10 +7,10 @@ checking for whether -std=c99 is accepted as CFLAGS... yes
 creating Makefile
 
 current directory: /home/user_ayasong0/private/Essential-Oil-app/vendor/bundle/ruby/3.2.0/gems/ed25519-1.4.0/ext/ed25519_ref10
-make DESTDIR\= sitearchdir\=./.gem.20260222-97462-7u0nyq sitelibdir\=./.gem.20260222-97462-7u0nyq clean
+make DESTDIR\= sitearchdir\=./.gem.20260225-58351-zyes6q sitelibdir\=./.gem.20260225-58351-zyes6q clean
 
 current directory: /home/user_ayasong0/private/Essential-Oil-app/vendor/bundle/ruby/3.2.0/gems/ed25519-1.4.0/ext/ed25519_ref10
-make DESTDIR\= sitearchdir\=./.gem.20260222-97462-7u0nyq sitelibdir\=./.gem.20260222-97462-7u0nyq
+make DESTDIR\= sitearchdir\=./.gem.20260225-58351-zyes6q sitelibdir\=./.gem.20260225-58351-zyes6q
 compiling ed25519_ref10.c
 ed25519_ref10.c: In function ‘Init_ed25519_ref10’:
 ed25519_ref10.c:12:6: warning: old-style function definition [-Wold-style-definition]
@@ -32,8 +32,8 @@ compiling verify.c
 linking shared-object ed25519_ref10.so
 
 current directory: /home/user_ayasong0/private/Essential-Oil-app/vendor/bundle/ruby/3.2.0/gems/ed25519-1.4.0/ext/ed25519_ref10
-make DESTDIR\= sitearchdir\=./.gem.20260222-97462-7u0nyq sitelibdir\=./.gem.20260222-97462-7u0nyq install
-/usr/bin/install -c -m 0755 ed25519_ref10.so ./.gem.20260222-97462-7u0nyq
+make DESTDIR\= sitearchdir\=./.gem.20260225-58351-zyes6q sitelibdir\=./.gem.20260225-58351-zyes6q install
+/usr/bin/install -c -m 0755 ed25519_ref10.so ./.gem.20260225-58351-zyes6q
 
 current directory: /home/user_ayasong0/private/Essential-Oil-app/vendor/bundle/ruby/3.2.0/gems/ed25519-1.4.0/ext/ed25519_ref10
-make DESTDIR\= sitearchdir\=./.gem.20260222-97462-7u0nyq sitelibdir\=./.gem.20260222-97462-7u0nyq clean
+make DESTDIR\= sitearchdir\=./.gem.20260225-58351-zyes6q sitelibdir\=./.gem.20260225-58351-zyes6q clean

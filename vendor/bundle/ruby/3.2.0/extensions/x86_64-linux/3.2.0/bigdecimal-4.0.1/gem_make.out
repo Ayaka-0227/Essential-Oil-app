@@ -22,17 +22,17 @@ checking for RB_WARN_CATEGORY_DEPRECATED in ruby.h... yes
 creating Makefile
 
 current directory: /home/user_ayasong0/private/Essential-Oil-app/vendor/bundle/ruby/3.2.0/gems/bigdecimal-4.0.1/ext/bigdecimal
-make DESTDIR\= sitearchdir\=./.gem.20260222-97462-3qhyyq sitelibdir\=./.gem.20260222-97462-3qhyyq clean
+make DESTDIR\= sitearchdir\=./.gem.20260225-58351-pwiyk2 sitelibdir\=./.gem.20260225-58351-pwiyk2 clean
 
 current directory: /home/user_ayasong0/private/Essential-Oil-app/vendor/bundle/ruby/3.2.0/gems/bigdecimal-4.0.1/ext/bigdecimal
-make DESTDIR\= sitearchdir\=./.gem.20260222-97462-3qhyyq sitelibdir\=./.gem.20260222-97462-3qhyyq
+make DESTDIR\= sitearchdir\=./.gem.20260225-58351-pwiyk2 sitelibdir\=./.gem.20260225-58351-pwiyk2
 compiling bigdecimal.c
 compiling missing.c
 linking shared-object bigdecimal.so
 
 current directory: /home/user_ayasong0/private/Essential-Oil-app/vendor/bundle/ruby/3.2.0/gems/bigdecimal-4.0.1/ext/bigdecimal
-make DESTDIR\= sitearchdir\=./.gem.20260222-97462-3qhyyq sitelibdir\=./.gem.20260222-97462-3qhyyq install
-/usr/bin/install -c -m 0755 bigdecimal.so ./.gem.20260222-97462-3qhyyq
+make DESTDIR\= sitearchdir\=./.gem.20260225-58351-pwiyk2 sitelibdir\=./.gem.20260225-58351-pwiyk2 install
+/usr/bin/install -c -m 0755 bigdecimal.so ./.gem.20260225-58351-pwiyk2
 
 current directory: /home/user_ayasong0/private/Essential-Oil-app/vendor/bundle/ruby/3.2.0/gems/bigdecimal-4.0.1/ext/bigdecimal
-make DESTDIR\= sitearchdir\=./.gem.20260222-97462-3qhyyq sitelibdir\=./.gem.20260222-97462-3qhyyq clean
+make DESTDIR\= sitearchdir\=./.gem.20260225-58351-pwiyk2 sitelibdir\=./.gem.20260225-58351-pwiyk2 clean

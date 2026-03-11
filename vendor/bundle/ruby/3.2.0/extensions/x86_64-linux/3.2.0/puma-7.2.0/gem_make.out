@@ -25,18 +25,18 @@ checking for SSL_get1_peer_certificate() in openssl/ssl.h... yes
 creating Makefile
 
 current directory: /home/user_ayasong0/private/Essential-Oil-app/vendor/bundle/ruby/3.2.0/gems/puma-7.2.0/ext/puma_http11
-make DESTDIR\= sitearchdir\=./.gem.20260222-97462-n2kn28 sitelibdir\=./.gem.20260222-97462-n2kn28 clean
+make DESTDIR\= sitearchdir\=./.gem.20260225-58351-cmzhpm sitelibdir\=./.gem.20260225-58351-cmzhpm clean
 
 current directory: /home/user_ayasong0/private/Essential-Oil-app/vendor/bundle/ruby/3.2.0/gems/puma-7.2.0/ext/puma_http11
-make DESTDIR\= sitearchdir\=./.gem.20260222-97462-n2kn28 sitelibdir\=./.gem.20260222-97462-n2kn28
+make DESTDIR\= sitearchdir\=./.gem.20260225-58351-cmzhpm sitelibdir\=./.gem.20260225-58351-cmzhpm
 compiling http11_parser.c
 compiling mini_ssl.c
 compiling puma_http11.c
 linking shared-object puma/puma_http11.so
 
 current directory: /home/user_ayasong0/private/Essential-Oil-app/vendor/bundle/ruby/3.2.0/gems/puma-7.2.0/ext/puma_http11
-make DESTDIR\= sitearchdir\=./.gem.20260222-97462-n2kn28 sitelibdir\=./.gem.20260222-97462-n2kn28 install
-/usr/bin/install -c -m 0755 puma_http11.so ./.gem.20260222-97462-n2kn28/puma
+make DESTDIR\= sitearchdir\=./.gem.20260225-58351-cmzhpm sitelibdir\=./.gem.20260225-58351-cmzhpm install
+/usr/bin/install -c -m 0755 puma_http11.so ./.gem.20260225-58351-cmzhpm/puma
 
 current directory: /home/user_ayasong0/private/Essential-Oil-app/vendor/bundle/ruby/3.2.0/gems/puma-7.2.0/ext/puma_http11
-make DESTDIR\= sitearchdir\=./.gem.20260222-97462-n2kn28 sitelibdir\=./.gem.20260222-97462-n2kn28 clean
+make DESTDIR\= sitearchdir\=./.gem.20260225-58351-cmzhpm sitelibdir\=./.gem.20260225-58351-cmzhpm clean
