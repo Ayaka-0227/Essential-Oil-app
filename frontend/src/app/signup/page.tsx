@@ -1,13 +1,42 @@
 "use client";
 
+import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 
 export default function SignupPage() {
   const router = useRouter();
+  const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    router.push('/login');
+    setError(null);
+    setLoading(true);
+
+    const form = event.currentTarget;
+    const email = (form.elements.namedItem('email') as HTMLInputElement).value;
+    const password = (form.elements.namedItem('password') as HTMLInputElement).value;
+    const passwordConfirmation = (form.elements.namedItem('passwordConfirmation') as HTMLInputElement).value;
+
+    try {
+      const res = await fetch('http://localhost:3000/users', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ user: { email, password, password_confirmation: passwordConfirmation } }),
+      });
+
+      if (res.ok) {
+        router.push('/login');
+      } else {
+        const data = await res.json().catch(() => ({}));
+        const messages: string[] = data?.errors ?? [];
+        setError(messages.length > 0 ? messages.join('、') : '登録に失敗しました。入力内容をご確認ください。');
+      }
+    } catch {
+      setError('サーバーに接続できませんでした。');
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -17,6 +46,10 @@ export default function SignupPage() {
         <p className="mb-8 text-sm text-stone-500">
           アカウントを作成をお願いします。
         </p>
+
+        {error && (
+          <p className="mb-4 rounded-lg bg-red-50 px-4 py-3 text-sm text-red-600">{error}</p>
+        )}
 
         <form className="space-y-5" onSubmit={handleSubmit}>
           <div>
@@ -111,9 +144,10 @@ export default function SignupPage() {
 
           <button
             type="submit"
-            className="w-full rounded-full bg-teal-800 px-5 py-3 font-semibold text-white transition hover:bg-teal-900"
+            disabled={loading}
+            className="w-full rounded-full bg-teal-800 px-5 py-3 font-semibold text-white transition hover:bg-teal-900 disabled:opacity-60"
           >
-            アカウントを作成
+            {loading ? '登録中...' : 'アカウントを作成'}
           </button>
         </form>
       </div>

@@ -4,13 +4,20 @@ class Users::SessionsController < Devise::SessionsController
   private
 
   def respond_with(resource, _opts = {})
+    token = auth_token(resource)
     render json: {
       message: "Logged in successfully.",
+      auth_token: token,
       user: {
         id: resource.id,
-        email: resource.email
+        email: resource.email,
+        admin: resource.admin
       }
     }, status: :ok
+  end
+
+  def auth_token(resource)
+    Warden::JWTAuth::UserEncoder.new.call(resource, :user, nil).first
   end
 
   def respond_to_on_destroy

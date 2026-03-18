@@ -1,32 +1,21 @@
-import Link from 'next/link';
-
-const aromaHistory: Array<{ id: number; date: string; oilName: string; note: string }> = [];
+import Link from "next/link";
+import HistorySection from "@/components/HistorySection";
+import HamburgerMenu from "@/components/HamburgerMenu";
 
 export default function HistoryPage() {
   return (
-    <main className="min-h-screen bg-[#f7f4ef] px-6 py-12 text-stone-800">
-      <div className="mx-auto w-full max-w-2xl rounded-2xl bg-white p-8 shadow-lg">
-        {aromaHistory.length > 0 && (
-          <>
-            <h1 className="mb-6 text-3xl font-semibold tracking-tight">過去のおすすめアロマオイル</h1>
+    <main className="relative -top-[0.5cm] min-h-screen overflow-x-hidden bg-[#f7f4ef] pb-28 text-stone-800 sm:pb-32">
+      <HamburgerMenu />
+      <div className="px-4 pt-6 text-center sm:px-6 sm:pt-8" />
 
-            <div className="space-y-4">
-              {aromaHistory.map((item) => (
-                <article key={item.id} className="rounded-xl border border-stone-200 bg-stone-50 p-4">
-                  <p className="text-xs font-medium text-stone-500">{item.date}</p>
-                  <h2 className="mt-1 text-lg font-semibold text-teal-800">{item.oilName}</h2>
-                  <p className="mt-2 text-sm leading-relaxed text-stone-600">{item.note}</p>
-                </article>
-              ))}
-            </div>
-          </>
-        )}
+      <HistorySection />
 
+      <div className="fixed bottom-4 left-1/2 z-30 w-[calc(100%-2rem)] max-w-4xl -translate-x-1/2 sm:bottom-6 sm:w-[calc(100%-3rem)]">
         <Link
-          href="/check"
-          className="mt-8 block w-full rounded-full bg-teal-800 px-5 py-3 text-center font-semibold text-white transition hover:bg-teal-900"
+          href="/check/questions"
+          className="block w-full rounded-full bg-teal-800 px-5 py-3 text-center font-semibold text-white shadow-lg shadow-teal-900/20 transition hover:bg-teal-900"
         >
-          メンタルチェックを始める
+          質問に答える
         </Link>
       </div>
     </main>

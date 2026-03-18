@@ -3,12 +3,12 @@ class Api::MentalCheckResultsController < ApplicationController
 
   def index
     results = current_user.mental_check_results.order(created_at: :desc)
-    render json: results
+    render json: results, include: :recommended_oil
   end
 
   def create
     result = current_user.mental_check_results.create!(mental_check_params)
-    render json: result
+    render json: result, include: :recommended_oil, status: :created
   end
 
   private

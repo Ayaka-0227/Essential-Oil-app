@@ -11,6 +11,7 @@ class ApplicationController < ActionController::Base
     request.format.json? ||
       request.media_type == "application/json" ||
       request.path.start_with?("/api/") ||
+      request.path.start_with?("/admin/") ||
       request.path == "/users/sign_in" ||
       request.path == "/users/sign_out"
   end
