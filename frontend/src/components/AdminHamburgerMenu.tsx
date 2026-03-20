@@ -12,6 +12,24 @@ export default function AdminHamburgerMenu() {
     router.push(path);
   };
 
+  const handleLogout = async () => {
+    try {
+      const token = localStorage.getItem("auth_token");
+      await fetch("http://localhost:3000/users/sign_out", {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          ...(token ? { Authorization: `Bearer ${token}` } : {}),
+        },
+      });
+    } catch {
+      // エラーでもローカルをクリアしてTop画面へ
+    } finally {
+      localStorage.clear();
+      router.push("/");
+    }
+  };
+
   return (
     <>
       {/* ハンバーガーボタン */}
@@ -67,30 +85,6 @@ export default function AdminHamburgerMenu() {
             一覧
           </button>
 
-          <button
-            type="button"
-            onClick={() => navigate("/admin/aroma-oils/new")}
-            className="flex w-full items-center gap-2 rounded-xl px-4 py-2.5 text-sm text-stone-700 transition hover:bg-stone-50"
-          >
-            追加
-          </button>
-
-          <button
-            type="button"
-            onClick={() => navigate("/admin/aroma-oils")}
-            className="flex w-full items-center gap-2 rounded-xl px-4 py-2.5 text-sm text-stone-700 transition hover:bg-stone-50"
-          >
-            更新
-          </button>
-
-          <button
-            type="button"
-            onClick={() => navigate("/admin/aroma-oils")}
-            className="flex w-full items-center gap-2 rounded-xl px-4 py-2.5 text-sm text-stone-700 transition hover:bg-stone-50"
-          >
-            削除
-          </button>
-
           {/* ユーザー管理 */}
           <div className="pt-3 border-t border-stone-100 mt-3" />
 
@@ -100,6 +94,17 @@ export default function AdminHamburgerMenu() {
             className="flex w-full items-center gap-2 rounded-xl px-4 py-2.5 text-sm font-medium text-stone-700 transition hover:bg-stone-50"
           >
             ユーザー管理
+          </button>
+
+          {/* ログアウト */}
+          <div className="pt-3 border-t border-stone-100 mt-3" />
+
+          <button
+            type="button"
+            onClick={handleLogout}
+            className="flex w-full items-center gap-2 rounded-xl px-4 py-2.5 text-sm font-semibold text-red-600 transition hover:bg-red-50"
+          >
+            ログアウト
           </button>
         </nav>
       </aside>

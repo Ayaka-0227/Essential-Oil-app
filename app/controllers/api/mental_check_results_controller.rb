@@ -11,6 +11,16 @@ class Api::MentalCheckResultsController < ApplicationController
     render json: result, include: :recommended_oil, status: :created
   end
 
+  def update
+    result = current_user.mental_check_results.find(params[:id])
+
+    if result.update(mental_check_params)
+      render json: result, include: :recommended_oil
+    else
+      render json: { errors: result.errors.full_messages }, status: :unprocessable_entity
+    end
+  end
+
   private
 
   def mental_check_params
@@ -23,7 +33,8 @@ class Api::MentalCheckResultsController < ApplicationController
       :vitality,
       :mood,
       :concentration,
-      :recommended_oil_id
+      :recommended_oil_id,
+      :feedback
     )
   end
 end

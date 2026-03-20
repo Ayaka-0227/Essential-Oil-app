@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   root to: redirect("/up")
 
   namespace :api do
-    resources :mental_check_results, only: [ :index, :create, :show ]
+    resources :mental_check_results, only: [ :index, :create, :show, :update ]
   end
 
   namespace :admin do

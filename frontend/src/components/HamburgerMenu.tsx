@@ -1,12 +1,16 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 
 export default function HamburgerMenu() {
   const [open, setOpen] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
   const router = useRouter();
-  const isAdmin = typeof window !== "undefined" && localStorage.getItem("is_admin") === "true";
+
+  useEffect(() => {
+    setIsAdmin(localStorage.getItem("is_admin") === "true");
+  }, []);
 
   const handleLogout = async () => {
     try {
