@@ -200,10 +200,21 @@ Devise.setup do |config|
   # config.lock_strategy = :failed_attempts
 
   config.jwt do |jwt|
+    credentials_jwt_secret = begin
+      Rails.application.credentials.devise_jwt_secret_key.presence
+    rescue ActiveSupport::MessageEncryptor::InvalidMessage,
+           ActiveSupport::EncryptedFile::MissingKeyError,
+           ActiveSupport::EncryptedFile::MissingContentError,
+           ActiveSupport::EncryptedFile::InvalidKeyLengthError,
+           ArgumentError
+      nil
+    end
+
     jwt.secret = ENV["DEVISE_JWT_SECRET_KEY"].presence ||
-      Rails.application.credentials.devise_jwt_secret_key.presence ||
-      ENV["SECRET_KEY_BASE"].presence ||
-      Rails.application.secret_key_base
+      credentials_jwt_secret ||
+      ENV["SECRET_KEY_BASE"].presence
+
+    raise "Set DEVISE_JWT_SECRET_KEY or SECRET_KEY_BASE" if jwt.secret.blank?
     jwt.dispatch_requests = [
       [ "POST", %r{^/users/sign_in$} ]
     ]
