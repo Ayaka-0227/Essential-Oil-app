@@ -5,14 +5,19 @@ services:
     plan: free
     repo: ./
     buildCommand: |
-      bundle install --deployment --without development test
-      RAILS_ENV=production bin/rails assets:precompile
+      bundle install
+      RAILS_ENV=production bundle exec rake assets:precompile
+      RAILS_ENV=production bundle exec rake assets:clean
     startCommand: bundle exec puma -C config/puma.rb
     # Optional: run migrations automatically on deploy
     releaseCommand: bin/rails db:migrate
     envVars:
       - key: RAILS_ENV
         value: production
+      - key: DATABASE_URL
+        fromDatabase:
+          name: essential-oil-db
+          property: connectionString
 
 databases:
   - name: essential-oil-db
