@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import HistorySection from '@/components/HistorySection';
 
 export default function HomePage() {
   return (
@@ -50,6 +51,8 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      <HistorySection />
     </main>
   );
 }

@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  devise_for :users, controllers: { sessions: "users/sessions" }
+  devise_for :users, controllers: { sessions: "users/sessions", registrations: "users/registrations" }
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
@@ -14,6 +14,11 @@ Rails.application.routes.draw do
   root to: redirect("/up")
 
   namespace :api do
-    resources :mental_check_results, only: [ :index, :create, :show ]
+    resources :mental_check_results, only: [ :index, :create, :show, :update ]
+  end
+
+  namespace :admin do
+    resources :aroma_oils, only: [ :index, :create, :update, :destroy ]
+    resources :users, only: [ :index ]
   end
 end

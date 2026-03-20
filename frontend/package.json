@@ -9,15 +9,17 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "chart.js": "^4.5.1",
     "next": "14.2.5",
     "react": "18.3.1",
+    "react-chartjs-2": "^5.3.1",
     "react-dom": "18.3.1"
   },
   "devDependencies": {
-    "autoprefixer": "^10.4.20",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "autoprefixer": "^10.4.20",
     "eslint": "^8.57.0",
     "eslint-config-next": "14.2.5",
     "postcss": "^8.4.41",
