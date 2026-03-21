@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   # get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
 
   # Defines the root path route ("/")
-  root to: redirect("/up")
+  root "home#index"
 
   namespace :api do
     resources :mental_check_results, only: [ :index, :create, :show, :update ]

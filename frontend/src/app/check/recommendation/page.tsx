@@ -4,6 +4,7 @@ import { Suspense, useEffect, useMemo, useRef, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import dynamic from "next/dynamic";
 import HamburgerMenu from "@/components/HamburgerMenu";
+import { apiUrl } from "@/lib/api";
 import {
   buildMessage,
   calcScores,
@@ -74,7 +75,7 @@ function RecommendationContent() {
       try {
         const oilId = OIL_NAME_TO_ID[finalOil.name] || null;
         const token = typeof window !== "undefined" ? localStorage.getItem("auth_token") : null;
-        const res = await fetch("http://localhost:3000/api/mental_check_results", {
+        const res = await fetch(apiUrl("/api/mental_check_results"), {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

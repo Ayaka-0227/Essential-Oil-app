@@ -1,0 +1,46 @@
+<main class="portal-shell">
+  <section class="portal-hero">
+    <p class="portal-eyebrow">Essential Oil App</p>
+    <h1>ユーザー画面と管理者画面の入口</h1>
+    <p class="portal-lead">
+      このURLはRails APIサーバーです。実際の操作画面はフロントアプリで表示します。
+      下のボタンからユーザー画面または管理者画面を開いてください。
+    </p>
+  </section>
+
+  <section class="portal-grid" aria-label="アプリ入口">
+    <article class="portal-card">
+      <p class="portal-card-label">User</p>
+      <h2>ユーザー画面</h2>
+      <p>
+        メンタルチェック、結果表示、履歴確認はこちらから入ります。
+      </p>
+      <div class="portal-actions">
+        <%= link_to "トップを開く", @user_app_url, class: "portal-button portal-button-primary" %>
+        <%= link_to "ログイン", @login_url, class: "portal-button portal-button-secondary" %>
+      </div>
+    </article>
+
+    <article class="portal-card">
+      <p class="portal-card-label">Admin</p>
+      <h2>管理者画面</h2>
+      <p>
+        アロマオイル管理とユーザー一覧は管理者画面から確認できます。
+      </p>
+      <div class="portal-actions">
+        <%= link_to "管理者画面を開く", @admin_app_url, class: "portal-button portal-button-primary" %>
+      </div>
+    </article>
+
+    <article class="portal-card portal-card-muted">
+      <p class="portal-card-label">API</p>
+      <h2>サーバー確認</h2>
+      <p>
+        APIサーバーの稼働確認はヘルスチェックから行えます。
+      </p>
+      <div class="portal-actions">
+        <%= link_to "ヘルスチェック", "/up", class: "portal-button portal-button-secondary" %>
+      </div>
+    </article>
+  </section>
+</main>

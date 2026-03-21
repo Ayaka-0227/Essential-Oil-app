@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import AdminHamburgerMenu from "@/components/AdminHamburgerMenu";
+import { apiUrl } from "@/lib/api";
 
 type User = { id: number; email: string; admin: boolean; created_at: string };
 
@@ -16,7 +17,7 @@ export default function AdminUsersPage() {
     const token = localStorage.getItem("auth_token");
     if (!token) { router.push("/login"); return; }
 
-    fetch("http://localhost:3000/admin/users", {
+    fetch(apiUrl("/admin/users"), {
       headers: { Authorization: `Bearer ${token}` },
     })
       .then((r) => {

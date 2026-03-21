@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import AdminHamburgerMenu from "@/components/AdminHamburgerMenu";
+import { apiUrl } from "@/lib/api";
 
 const MENTAL_CATEGORIES = [
   { key: "stress", label: "ストレス・緊張" },
@@ -45,7 +46,7 @@ export default function AdminAromaOilNewPage() {
     const token = localStorage.getItem("auth_token");
 
     try {
-      const res = await fetch("http://localhost:3000/admin/aroma_oils", {
+      const res = await fetch(apiUrl("/admin/aroma_oils"), {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

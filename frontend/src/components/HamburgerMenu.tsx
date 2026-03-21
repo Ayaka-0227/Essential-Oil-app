@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { apiUrl } from "@/lib/api";
 
 export default function HamburgerMenu() {
   const [open, setOpen] = useState(false);
@@ -15,7 +16,7 @@ export default function HamburgerMenu() {
   const handleLogout = async () => {
     try {
       const token = localStorage.getItem("auth_token");
-      await fetch("http://localhost:3000/users/sign_out", {
+      await fetch(apiUrl("/users/sign_out"), {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",

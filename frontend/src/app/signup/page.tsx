@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { apiUrl } from '@/lib/api';
 
 export default function SignupPage() {
   const router = useRouter();
@@ -19,7 +20,7 @@ export default function SignupPage() {
     const passwordConfirmation = (form.elements.namedItem('passwordConfirmation') as HTMLInputElement).value;
 
     try {
-      const res = await fetch('http://localhost:3000/users', {
+      const res = await fetch(apiUrl('/users'), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ user: { email, password, password_confirmation: passwordConfirmation } }),

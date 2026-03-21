@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { apiUrl } from '@/lib/api';
 
 export default function LoginPage() {
   const router = useRouter();
@@ -16,7 +17,7 @@ export default function LoginPage() {
     setLoading(true);
 
     try {
-      const res = await fetch("http://localhost:3000/users/sign_in", {
+      const res = await fetch(apiUrl("/users/sign_in"), {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ user: { email: loginEmail, password: loginPassword } }),
