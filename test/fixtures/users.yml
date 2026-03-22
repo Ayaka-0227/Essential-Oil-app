@@ -2,9 +2,15 @@
 
 one:
   email: one@example.com
+  name: テストユーザー1
+  gender: male
+  birth_date: 1990-01-01
   encrypted_password: <%= Devise::Encryptor.digest(User, "password123") %>
 
 two:
   email: two@example.com
+  name: テストユーザー2
+  gender: female
+  birth_date: 1992-02-02
   encrypted_password: <%= Devise::Encryptor.digest(User, "password123") %>
 # column: value

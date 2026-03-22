@@ -25,6 +25,21 @@ services:
           name: essential-oil-db
           property: connectionString
 
+  - type: web
+    name: essential-oil-frontend
+    env: node
+    plan: free
+    rootDir: frontend
+    buildCommand: npm ci && npm run build
+    startCommand: npm start
+    envVars:
+      - key: NEXT_PUBLIC_API_URL
+        # Renderダッシュボードで本番バックエンドのURLを設定してください
+        # 例: https://essential-oil-app.onrender.com
+        value: https://essential-oil-app.onrender.com
+      - key: NODE_ENV
+        value: production
+
 databases:
   - name: essential-oil-db
     engine: postgres

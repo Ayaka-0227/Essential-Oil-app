@@ -4,11 +4,17 @@ class Api::MentalCheckResultsControllerTest < ActionDispatch::IntegrationTest
   setup do
     @user = User.create!(
       email: "api-user@example.com",
+      name: "API User",
+      gender: "female",
+      birth_date: Date.new(1995, 1, 1),
       password: "password123",
       password_confirmation: "password123"
     )
     @other_user = User.create!(
       email: "other-user@example.com",
+      name: "Other User",
+      gender: "male",
+      birth_date: Date.new(1990, 6, 15),
       password: "password123",
       password_confirmation: "password123"
     )

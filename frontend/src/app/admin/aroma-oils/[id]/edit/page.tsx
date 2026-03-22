@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { useRouter, useParams } from "next/navigation";
 import AdminHamburgerMenu from "@/components/AdminHamburgerMenu";
+import { API_BASE_URL } from "@/lib/api";
 
 const MENTAL_CATEGORIES = [
   { key: "stress", label: "ストレス・緊張" },
@@ -45,8 +46,9 @@ export default function AdminAromaOilEditPage() {
   useEffect(() => {
     const token = localStorage.getItem("auth_token");
     if (!token) { router.push("/login"); return; }
+    if (localStorage.getItem("is_admin") !== "true") { router.push("/"); return; }
 
-    fetch(`http://localhost:3000/admin/aroma_oils`, {
+    fetch(`${API_BASE_URL}/admin/aroma_oils`, {
       headers: { Authorization: `Bearer ${token}` },
     })
       .then((r) => r.json())
@@ -71,7 +73,7 @@ export default function AdminAromaOilEditPage() {
     const token = localStorage.getItem("auth_token");
 
     try {
-      const res = await fetch(`http://localhost:3000/admin/aroma_oils/${id}`, {
+      const res = await fetch(`${API_BASE_URL}/admin/aroma_oils/${id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",

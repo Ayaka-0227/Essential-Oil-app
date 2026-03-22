@@ -1,8 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import AdminHamburgerMenu from "@/components/AdminHamburgerMenu";
+import { API_BASE_URL } from "@/lib/api";
 
 const MENTAL_CATEGORIES = [
   { key: "stress", label: "ストレス・緊張" },
@@ -38,6 +39,13 @@ export default function AdminAromaOilNewPage() {
     );
   };
 
+  useEffect(() => {
+    const token = localStorage.getItem("auth_token");
+    if (!token || localStorage.getItem("is_admin") !== "true") {
+      router.push("/");
+    }
+  }, [router]);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
@@ -45,7 +53,7 @@ export default function AdminAromaOilNewPage() {
     const token = localStorage.getItem("auth_token");
 
     try {
-      const res = await fetch("http://localhost:3000/admin/aroma_oils", {
+      const res = await fetch(`${API_BASE_URL}/admin/aroma_oils`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
