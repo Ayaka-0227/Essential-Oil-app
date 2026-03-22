@@ -19,6 +19,6 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resources :aroma_oils, only: [ :index, :create, :update, :destroy ]
-    resources :users, only: [ :index ]
+    resources :users, only: [ :index, :show ]
   end
 end

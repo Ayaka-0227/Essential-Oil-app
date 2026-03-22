@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { MentalCheckHistoryEntry } from "@/lib/mental-check-storage";
+import { API_BASE_URL } from "@/lib/api";
 
 const FEEDBACK_OPTIONS = [
   { value: "good", label: "良かった" },
@@ -45,7 +46,7 @@ export default function HistorySection() {
         return;
       }
 
-      const res = await fetch("http://localhost:3000/api/mental_check_results", {
+      const res = await fetch(`${API_BASE_URL}/api/mental_check_results`, {
         headers: {
           "Content-Type": "application/json",
           "Authorization": `Bearer ${token}`,
@@ -117,7 +118,7 @@ export default function HistorySection() {
 
     setSavingId(id);
     try {
-      const res = await fetch(`http://localhost:3000/api/mental_check_results/${id}`, {
+      const res = await fetch(`${API_BASE_URL}/api/mental_check_results/${id}`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",

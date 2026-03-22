@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { API_BASE_URL } from '@/lib/api';
 
 export default function SignupPage() {
   const router = useRouter();
@@ -14,15 +15,27 @@ export default function SignupPage() {
     setLoading(true);
 
     const form = event.currentTarget;
+    const name = (form.elements.namedItem('name') as HTMLInputElement).value;
+    const gender = (form.elements.namedItem('gender') as HTMLInputElement | null)?.value ?? '';
+    const birthDate = (form.elements.namedItem('birthDate') as HTMLInputElement).value;
     const email = (form.elements.namedItem('email') as HTMLInputElement).value;
     const password = (form.elements.namedItem('password') as HTMLInputElement).value;
     const passwordConfirmation = (form.elements.namedItem('passwordConfirmation') as HTMLInputElement).value;
 
     try {
-      const res = await fetch('http://localhost:3000/users', {
+      const res = await fetch(`${API_BASE_URL}/users`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ user: { email, password, password_confirmation: passwordConfirmation } }),
+        body: JSON.stringify({
+          user: {
+            name,
+            gender,
+            birth_date: birthDate || null,
+            email,
+            password,
+            password_confirmation: passwordConfirmation,
+          },
+        }),
       });
 
       if (res.ok) {
@@ -60,6 +73,7 @@ export default function SignupPage() {
               id="name"
               name="name"
               type="text"
+              required
               className="w-full rounded-lg border border-stone-300 px-4 py-2.5 outline-none transition focus:border-teal-700"
               placeholder="例: 山田 花子"
             />
@@ -113,6 +127,7 @@ export default function SignupPage() {
                   name="gender"
                   type="radio"
                   value="male"
+                  required
                   className="h-4 w-4 border-stone-300 text-teal-700 focus:ring-teal-700"
                 />
                 男性
@@ -123,6 +138,7 @@ export default function SignupPage() {
                   name="gender"
                   type="radio"
                   value="female"
+                  required
                   className="h-4 w-4 border-stone-300 text-teal-700 focus:ring-teal-700"
                 />
                 女性
@@ -138,6 +154,7 @@ export default function SignupPage() {
               id="birthDate"
               name="birthDate"
               type="date"
+              required
               className="w-full rounded-lg border border-stone-300 px-4 py-2.5 outline-none transition focus:border-teal-700"
             />
           </div>

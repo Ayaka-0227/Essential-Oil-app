@@ -7,7 +7,12 @@ export default function AdminPage() {
   const router = useRouter();
 
   useEffect(() => {
-    router.replace("/admin/aroma-oils");
+    const isAdmin = localStorage.getItem("is_admin") === "true";
+    if (!isAdmin) {
+      router.replace("/");
+    } else {
+      router.replace("/admin/aroma-oils");
+    }
   }, [router]);
 
   return null;

@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import AdminHamburgerMenu from "@/components/AdminHamburgerMenu";
+import { API_BASE_URL } from "@/lib/api";
 
 type AromaOil = { id: number; name: string; description: string };
 
@@ -16,8 +17,9 @@ export default function AdminAromaOilsPage() {
   useEffect(() => {
     const token = localStorage.getItem("auth_token");
     if (!token) { router.push("/login"); return; }
+    if (localStorage.getItem("is_admin") !== "true") { router.push("/"); return; }
 
-    fetch("http://localhost:3000/admin/aroma_oils", {
+    fetch(`${API_BASE_URL}/admin/aroma_oils`, {
       headers: { Authorization: `Bearer ${token}` },
     })
       .then((r) => {
@@ -34,7 +36,7 @@ export default function AdminAromaOilsPage() {
     if (!confirm(`「${name}」を削除しますか？`)) return;
     setDeleteError("");
     const token = localStorage.getItem("auth_token");
-    const res = await fetch(`http://localhost:3000/admin/aroma_oils/${id}`, {
+    const res = await fetch(`${API_BASE_URL}/admin/aroma_oils/${id}`, {
       method: "DELETE",
       headers: { Authorization: `Bearer ${token ?? ""}` },
     });
