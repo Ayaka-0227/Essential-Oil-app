@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  frontend_app_url = ENV["FRONTEND_APP_URL"]
+
   devise_for :users, controllers: { sessions: "users/sessions", registrations: "users/registrations" }
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
@@ -11,7 +13,7 @@ Rails.application.routes.draw do
   # get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
 
   # Defines the root path route ("/")
-  root to: redirect("/up")
+  root to: redirect(frontend_app_url.presence || "/up")
 
   namespace :api do
     resources :mental_check_results, only: [ :index, :create, :show, :update ]
