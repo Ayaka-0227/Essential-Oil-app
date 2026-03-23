@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import HistorySection from '@/components/HistorySection';
 
 export default function HomePage() {
   return (
@@ -34,25 +33,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 3ステップ紹介（余裕があれば追加） */}
-      <section className="bg-white py-16 px-6">
-        <div className="mx-auto max-w-4xl grid grid-cols-1 md:grid-cols-3 gap-8">
-          <div className="text-center p-4">
-            <div className="text-teal-800 text-2xl font-bold mb-2">01. Check</div>
-            <p className="text-sm text-stone-500">簡単な16の質問で、今の自分を客観的に見つめます。</p>
-          </div>
-          <div className="text-center p-4">
-            <div className="text-teal-800 text-2xl font-bold mb-2">02. Analyze</div>
-            <p className="text-sm text-stone-500">8つの指標から、心身のバランスをレーダーチャートで可視化。</p>
-          </div>
-          <div className="text-center p-4">
-            <div className="text-teal-800 text-2xl font-bold mb-2">03. Propose</div>
-            <p className="text-sm text-stone-500">あなたの状態と香りの好みに合わせた、至高の1本を選びます。</p>
-          </div>
-        </div>
-      </section>
-
-      <HistorySection />
     </main>
   );
 }
