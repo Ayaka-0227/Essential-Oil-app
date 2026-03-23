@@ -4,6 +4,15 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { API_BASE_URL } from '@/lib/api';
 
+type SignupFieldErrors = {
+  name?: string[];
+  email?: string[];
+  password?: string[];
+  password_confirmation?: string[];
+  gender?: string[];
+  birth_date?: string[];
+};
+
 function EyeIcon() {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -32,11 +41,13 @@ export default function SignupPage() {
   const [showPassword, setShowPassword] = useState(false);
   const [showPasswordConfirmation, setShowPasswordConfirmation] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [fieldErrors, setFieldErrors] = useState<SignupFieldErrors>({});
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setError(null);
+    setFieldErrors({});
     setLoading(true);
 
     try {
@@ -62,8 +73,14 @@ export default function SignupPage() {
         router.push('/login');
       } else {
         const data = await res.json().catch(() => ({}));
+        const nextFieldErrors: SignupFieldErrors = (data?.field_errors ?? {}) as SignupFieldErrors;
         const messages: string[] = data?.errors ?? [];
-        setError(messages.length > 0 ? messages.join('、') : '登録に失敗しました。入力内容をご確認ください。');
+        setFieldErrors(nextFieldErrors);
+        setError(
+          messages.length > 0
+            ? messages.join('、')
+            : `登録に失敗しました。入力内容をご確認ください。（HTTP ${res.status}）`,
+        );
       }
     } catch {
       setError('サーバーに接続できませんでした。');
@@ -93,12 +110,19 @@ export default function SignupPage() {
               id="name"
               name="name"
               type="text"
+              autoComplete="name"
               required
               value={name}
-              onChange={(e) => setName(e.target.value)}
+              onChange={(e) => {
+                setName(e.target.value);
+                setFieldErrors((prev) => ({ ...prev, name: undefined }));
+              }}
               className="w-full rounded-lg border border-stone-300 px-4 py-2.5 outline-none transition focus:border-teal-700"
               placeholder="例: 山田 花子"
             />
+            {fieldErrors.name?.map((message) => (
+              <p key={message} className="mt-2 text-xs text-red-600">{message}</p>
+            ))}
           </div>
 
           <div>
@@ -109,12 +133,19 @@ export default function SignupPage() {
               id="email"
               name="email"
               type="email"
+              autoComplete="email"
               required
               value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={(e) => {
+                setEmail(e.target.value);
+                setFieldErrors((prev) => ({ ...prev, email: undefined }));
+              }}
               className="w-full rounded-lg border border-stone-300 px-4 py-2.5 outline-none transition focus:border-teal-700"
               placeholder="example@mail.com"
             />
+            {fieldErrors.email?.map((message) => (
+              <p key={message} className="mt-2 text-xs text-red-600">{message}</p>
+            ))}
           </div>
 
           <div>
@@ -126,9 +157,13 @@ export default function SignupPage() {
                 id="password"
                 name="password"
                 type={showPassword ? 'text' : 'password'}
+                autoComplete="new-password"
                 required
                 value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                onChange={(e) => {
+                  setPassword(e.target.value);
+                  setFieldErrors((prev) => ({ ...prev, password: undefined }));
+                }}
                 className="w-full rounded-lg border border-stone-300 px-4 py-2.5 pr-10 outline-none transition focus:border-teal-700"
                 placeholder="8文字以上"
               />
@@ -142,6 +177,9 @@ export default function SignupPage() {
                 {showPassword ? <EyeOffIcon /> : <EyeIcon />}
               </button>
             </div>
+            {fieldErrors.password?.map((message) => (
+              <p key={message} className="mt-2 text-xs text-red-600">{message}</p>
+            ))}
           </div>
 
           <div>
@@ -153,9 +191,13 @@ export default function SignupPage() {
                 id="passwordConfirmation"
                 name="passwordConfirmation"
                 type={showPasswordConfirmation ? 'text' : 'password'}
+                autoComplete="new-password"
                 required
                 value={passwordConfirmation}
-                onChange={(e) => setPasswordConfirmation(e.target.value)}
+                onChange={(e) => {
+                  setPasswordConfirmation(e.target.value);
+                  setFieldErrors((prev) => ({ ...prev, password_confirmation: undefined }));
+                }}
                 className="w-full rounded-lg border border-stone-300 px-4 py-2.5 pr-10 outline-none transition focus:border-teal-700"
                 placeholder="もう一度入力してください"
               />
@@ -169,6 +211,9 @@ export default function SignupPage() {
                 {showPasswordConfirmation ? <EyeOffIcon /> : <EyeIcon />}
               </button>
             </div>
+            {fieldErrors.password_confirmation?.map((message) => (
+              <p key={message} className="mt-2 text-xs text-red-600">{message}</p>
+            ))}
           </div>
 
           <fieldset>
@@ -180,9 +225,13 @@ export default function SignupPage() {
                   name="gender"
                   type="radio"
                   value="male"
+                  autoComplete="sex"
                   required
                   checked={gender === 'male'}
-                  onChange={(e) => setGender(e.target.value)}
+                  onChange={(e) => {
+                    setGender(e.target.value);
+                    setFieldErrors((prev) => ({ ...prev, gender: undefined }));
+                  }}
                   className="h-4 w-4 border-stone-300 text-teal-700 focus:ring-teal-700"
                 />
                 男性
@@ -193,14 +242,21 @@ export default function SignupPage() {
                   name="gender"
                   type="radio"
                   value="female"
+                  autoComplete="sex"
                   required
                   checked={gender === 'female'}
-                  onChange={(e) => setGender(e.target.value)}
+                  onChange={(e) => {
+                    setGender(e.target.value);
+                    setFieldErrors((prev) => ({ ...prev, gender: undefined }));
+                  }}
                   className="h-4 w-4 border-stone-300 text-teal-700 focus:ring-teal-700"
                 />
                 女性
               </label>
             </div>
+            {fieldErrors.gender?.map((message) => (
+              <p key={message} className="mt-2 text-xs text-red-600">{message}</p>
+            ))}
           </fieldset>
 
           <div>
@@ -211,11 +267,18 @@ export default function SignupPage() {
               id="birthDate"
               name="birthDate"
               type="date"
+              autoComplete="bday"
               required
               value={birthDate}
-              onChange={(e) => setBirthDate(e.target.value)}
+              onChange={(e) => {
+                setBirthDate(e.target.value);
+                setFieldErrors((prev) => ({ ...prev, birth_date: undefined }));
+              }}
               className="w-full rounded-lg border border-stone-300 px-4 py-2.5 outline-none transition focus:border-teal-700"
             />
+            {fieldErrors.birth_date?.map((message) => (
+              <p key={message} className="mt-2 text-xs text-red-600">{message}</p>
+            ))}
           </div>
 
           <button

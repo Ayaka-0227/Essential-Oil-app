@@ -12,7 +12,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
         user: { id: resource.id, email: resource.email, name: resource.name }
       }, status: :created
     else
-      render json: { errors: resource.errors.full_messages }, status: :unprocessable_entity
+      render json: {
+        errors: resource.errors.full_messages,
+        field_errors: build_field_errors(resource)
+      }, status: :unprocessable_entity
     end
   end
 
@@ -21,6 +24,15 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   def render_duplicate_email_error
-    render json: { errors: [ "メールアドレスはすでに使用されています" ] }, status: :unprocessable_entity
+    render json: {
+      errors: [ "メールアドレスはすでに使用されています" ],
+      field_errors: { email: [ "メールアドレスはすでに使用されています" ] }
+    }, status: :unprocessable_entity
+  end
+
+  def build_field_errors(resource)
+    resource.errors.messages.each_with_object({}) do |(attribute, messages), result|
+      result[attribute] = messages
+    end
   end
 end

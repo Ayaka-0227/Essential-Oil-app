@@ -13,7 +13,7 @@ class ApplicationController < ActionController::Base
       request.path.start_with?("/api/") ||
       request.path.start_with?("/admin/") ||
       request.path == "/users/sign_in" ||
-    request.path == "/users/sign_out" ||
-    request.path == "/users"
+      request.path == "/users/sign_out" ||
+      request.path == "/users"
   end
 end
