@@ -93,6 +93,7 @@ export default function SignupPage() {
               id="name"
               name="name"
               type="text"
+              autoComplete="name"
               required
               value={name}
               onChange={(e) => setName(e.target.value)}
@@ -109,6 +110,7 @@ export default function SignupPage() {
               id="email"
               name="email"
               type="email"
+              autoComplete="email"
               required
               value={email}
               onChange={(e) => setEmail(e.target.value)}
@@ -126,6 +128,7 @@ export default function SignupPage() {
                 id="password"
                 name="password"
                 type={showPassword ? 'text' : 'password'}
+                autoComplete="new-password"
                 required
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
@@ -153,6 +156,7 @@ export default function SignupPage() {
                 id="passwordConfirmation"
                 name="passwordConfirmation"
                 type={showPasswordConfirmation ? 'text' : 'password'}
+                autoComplete="new-password"
                 required
                 value={passwordConfirmation}
                 onChange={(e) => setPasswordConfirmation(e.target.value)}
@@ -180,6 +184,7 @@ export default function SignupPage() {
                   name="gender"
                   type="radio"
                   value="male"
+                  autoComplete="sex"
                   required
                   checked={gender === 'male'}
                   onChange={(e) => setGender(e.target.value)}
@@ -193,6 +198,7 @@ export default function SignupPage() {
                   name="gender"
                   type="radio"
                   value="female"
+                  autoComplete="sex"
                   required
                   checked={gender === 'female'}
                   onChange={(e) => setGender(e.target.value)}
@@ -211,6 +217,7 @@ export default function SignupPage() {
               id="birthDate"
               name="birthDate"
               type="date"
+              autoComplete="bday"
               required
               value={birthDate}
               onChange={(e) => setBirthDate(e.target.value)}
