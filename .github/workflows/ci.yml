@@ -66,4 +66,5 @@ jobs:
           else
             bin/rails db:migrate
           fi
-          bin/rails test test:system
+          bin/rails test
+          bin/rails test:system
