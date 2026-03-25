@@ -9,8 +9,13 @@ class Api::MentalCheckResultsController < ApplicationController
   end
 
   def create
-    result = current_user.mental_check_results.create!(mental_check_params)
-    render json: result, include: :recommended_oil, status: :created
+    result = current_user.mental_check_results.new(mental_check_params)
+
+    if result.save
+      render json: result, include: :recommended_oil, status: :created
+    else
+      render json: { errors: result.errors.full_messages }, status: :unprocessable_entity
+    end
   end
 
   def update
