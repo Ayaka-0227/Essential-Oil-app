@@ -146,7 +146,7 @@ export default function QuestionsPage() {
                 : "cursor-not-allowed bg-stone-200 text-stone-400"
             }`}
           >
-            {isLastPage ? "結果を見る" : "next →"}
+            {isLastPage ? "結果を見る" : "次へ →"}
           </button>
         </div>
 
