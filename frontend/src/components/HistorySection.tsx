@@ -51,6 +51,7 @@ export default function HistorySection() {
           "Content-Type": "application/json",
           "Authorization": `Bearer ${token}`,
         },
+        credentials: "include",
         cache: "no-store",
       });
 
@@ -124,6 +125,7 @@ export default function HistorySection() {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
+        credentials: "include",
         body: JSON.stringify({
           mental_check_result: {
             feedback: entry.feedback,
