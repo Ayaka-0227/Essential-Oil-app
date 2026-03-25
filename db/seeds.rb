@@ -11,14 +11,14 @@
 admin_email = ENV["ADMIN_USER_EMAIL"].to_s.strip
 
 if admin_email.present?
-	user = User.find_by(email: admin_email)
+  user = User.find_by(email: admin_email)
 
-	if user
-		user.update!(admin: true) unless user.admin?
-		puts "Admin ensured: #{user.email}"
-	else
-		puts "Admin user not found yet: #{admin_email}"
-	end
+  if user
+    user.update!(admin: true) unless user.admin?
+    puts "Admin ensured: #{user.email}"
+  else
+    puts "Admin user not found yet: #{admin_email}"
+  end
 else
-	puts "ADMIN_USER_EMAIL is blank. Skip admin seed."
+  puts "ADMIN_USER_EMAIL is blank. Skip admin seed."
 end
