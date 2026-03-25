@@ -7,9 +7,16 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   def respond_with(resource, _opts = {})
     if resource.persisted?
+      resource.ensure_admin_role!
+
       render json: {
         message: "登録が完了しました。",
-        user: { id: resource.id, email: resource.email, name: resource.name }
+        user: {
+          id: resource.id,
+          email: resource.email,
+          name: resource.name,
+          admin: resource.admin
+        }
       }, status: :created
     else
       render json: {

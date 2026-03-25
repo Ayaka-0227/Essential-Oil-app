@@ -80,7 +80,7 @@ function ResultContent() {
             }}
             className="rounded-full bg-teal-800 px-8 py-3 text-sm font-semibold text-white shadow transition-all hover:bg-teal-900 hover:scale-105 active:scale-95"
           >
-            next →
+            次へ →
           </button>
         </div>
 
