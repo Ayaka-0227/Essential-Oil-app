@@ -51,6 +51,11 @@ function RecommendationContent() {
   const savedRef = useRef(false);
   const queryString = useMemo(() => params.toString(), [params]);
   const scentKey = params.get("scent");
+  const hasScoreParams = useMemo(
+    () => Array.from({ length: 16 }, (_, index) => params.has(String(index + 1))),
+    [params],
+  );
+  const hasRequiredParams = hasScoreParams.every(Boolean) && Boolean(scentKey);
 
   const scores = useMemo(() => calcScores(params), [queryString, params]);
   const chartScores = useMemo(() => CHART_ORDER.map((key) => scores[key]), [scores]);
@@ -107,18 +112,20 @@ function RecommendationContent() {
     saveToServer();
   }, [finalOil, queryString, scores, scentType, tops]);
 
-  if (!finalOil) {
+  if (!finalOil || !hasRequiredParams) {
     return (
       <main className="min-h-screen bg-[#f7f4ef] px-6 py-10 text-stone-800">
         <HamburgerMenu />
         <div className="mx-auto w-full max-w-lg rounded-2xl bg-white px-6 py-8 text-center shadow-sm">
-          <p className="text-sm text-stone-600">候補の計算に必要なデータが見つかりませんでした。</p>
+          <p className="text-sm text-stone-600">
+            おすすめ表示に必要なデータが不足しています。質問と香りの選択から進んでください。
+          </p>
           <button
             type="button"
-            onClick={() => router.push("/check")}
+            onClick={() => router.push(`/check/scent?${queryString}`)}
             className="mt-6 rounded-full bg-teal-800 px-6 py-3 text-sm font-semibold text-white"
           >
-            はじめからやり直す
+            香り選択へ戻る
           </button>
         </div>
       </main>
