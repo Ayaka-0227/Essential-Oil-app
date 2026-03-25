@@ -2,7 +2,7 @@ class Api::MentalCheckResultsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    results = MentalCheckResult.order(created_at: :desc)
+    results = current_user.mental_check_results.order(created_at: :desc)
     render json: results, include: :recommended_oil
   end
 
