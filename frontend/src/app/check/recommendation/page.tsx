@@ -17,33 +17,6 @@ const MentalRadarChart = dynamic(() => import("@/components/MentalRadarChart"), 
   ssr: false,
 });
 
-// オイル名からIDを取得するマッピング
-const OIL_NAME_TO_ID: Record<string, number> = {
-  "ラベンダー": 1,
-  "オレンジ": 2,
-  "グレープフルーツ": 3,
-  "タンジェリン": 4,
-  "レモン": 5,
-  "ベルガモット": 6,
-  "プチグレイン": 7,
-  "カモミールローマン": 8,
-  "ジャーマンカモミール": 9,
-  "ジャスミン": 10,
-  "ゼラニウム": 11,
-  "バニラ": 12,
-  "フランキンセンス": 13,
-  "サンダルウッド": 14,
-  "シスタス": 15,
-  "クローブ": 16,
-  "ジンジャー": 17,
-  "ブラックペッパー": 18,
-  "バジル": 19,
-  "ローズマリー": 20,
-  "ペパーミント": 21,
-  "スペアミント": 22,
-  "ヒノキ": 23,
-};
-
 function RecommendationContent() {
   const params = useSearchParams();
   const router = useRouter();
@@ -79,7 +52,6 @@ function RecommendationContent() {
     const saveToServer = async () => {
       const errorMsg = "サーバー保存に失敗しました";
       try {
-        const oilId = OIL_NAME_TO_ID[finalOil.name] || null;
         const token = typeof window !== "undefined" ? localStorage.getItem("auth_token") : null;
         const res = await fetch(`${API_BASE_URL}/api/mental_check_results`, {
           method: "POST",
@@ -98,7 +70,7 @@ function RecommendationContent() {
               vitality: scores.vitality,
               mood: scores.mood,
               concentration: scores.concentration,
-              recommended_oil_id: oilId,
+              recommended_oil_id: null,
             },
           }),
         });
