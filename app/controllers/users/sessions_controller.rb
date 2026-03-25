@@ -4,6 +4,7 @@ class Users::SessionsController < Devise::SessionsController
   private
 
   def respond_with(resource, _opts = {})
+    resource.ensure_admin_role!
     token = auth_token(resource)
     render json: {
       message: "Logged in successfully.",

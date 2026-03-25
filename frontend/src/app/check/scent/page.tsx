@@ -61,7 +61,7 @@ function ScentContent() {
                 : "cursor-not-allowed bg-stone-200 text-stone-400"
             }`}
           >
-            next →
+            次へ →
           </button>
         </div>
       </div>
