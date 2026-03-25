@@ -2,6 +2,8 @@ class Api::MentalCheckResultsController < ApplicationController
   before_action :authenticate_user!
 
   def index
+    return render json: [] unless current_user
+
     results = current_user.mental_check_results.order(created_at: :desc)
     render json: results, include: :recommended_oil
   end
