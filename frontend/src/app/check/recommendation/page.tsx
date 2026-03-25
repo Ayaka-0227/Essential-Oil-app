@@ -72,6 +72,7 @@ function RecommendationContent() {
 
     // サーバーに保存
     const saveToServer = async () => {
+      const errorMsg = "サーバー保存に失敗しました";
       try {
         const oilId = OIL_NAME_TO_ID[finalOil.name] || null;
         const token = typeof window !== "undefined" ? localStorage.getItem("auth_token") : null;
@@ -81,6 +82,7 @@ function RecommendationContent() {
             "Content-Type": "application/json",
             ...(token ? { "Authorization": `Bearer ${token}` } : {}),
           },
+          credentials: "include",
           body: JSON.stringify({
             mental_check_result: {
               stress: scores.stress,
@@ -95,13 +97,9 @@ function RecommendationContent() {
             },
           }),
         });
-        if (res.ok) {
-          setSaveMessage("結果をサーバーに保存しました");
-        } else {
-          setSaveMessage("サーバー保存は失敗、この端末に保存しました");
-        }
+        setSaveMessage(res.ok ? "結果をサーバーに保存しました" : errorMsg);
       } catch {
-        setSaveMessage("サーバー保存は失敗、この端末に保存しました");
+        setSaveMessage(errorMsg);
       }
     };
 
