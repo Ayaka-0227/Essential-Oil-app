@@ -26,7 +26,7 @@ aroma_oils_data = [
   { id: 20, name: "ローズマリー",         description: "すっきりした香り" },
   { id: 21, name: "ペパーミント",         description: "すっきりとした香り" },
   { id: 22, name: "スペアミント",         description: "マイルドなミント香" },
-  { id: 23, name: "ヒノキ",               description: "グラウンディングな香り" },
+  { id: 23, name: "ヒノキ",               description: "グラウンディングな香り" }
 ]
 
 aroma_oils_data.each do |attrs|
