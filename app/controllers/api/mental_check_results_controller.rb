@@ -9,7 +9,7 @@ class Api::MentalCheckResultsController < ApplicationController
   def create
     attrs = mental_check_params.to_h
     if attrs["recommended_oil_id"].blank? && recommended_oil_name.present?
-      attrs["recommended_oil_id"] = AromaOil.find_by(name: recommended_oil_name)&.id
+      attrs["recommended_oil_id"] = resolve_recommended_oil_id(recommended_oil_name)
     end
 
     result = current_user.mental_check_results.new(attrs)
@@ -50,5 +50,17 @@ class Api::MentalCheckResultsController < ApplicationController
 
   def recommended_oil_name
     params.dig(:mental_check_result, :recommended_oil_name)
+  end
+
+  def resolve_recommended_oil_id(name)
+    normalized = name.to_s.squish
+    exact_match = AromaOil.find_by(name: normalized)&.id
+    return exact_match if exact_match.present?
+
+    # スペース揺れ（半角/全角）で一致しない場合のフォールバック
+    compact = normalized.gsub(/[[:space:]]+/, "")
+    AromaOil
+      .where("REPLACE(REPLACE(name, ' ', ''), '　', '') = ?", compact)
+      .pick(:id)
   end
 end

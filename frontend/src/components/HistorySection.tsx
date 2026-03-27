@@ -82,7 +82,7 @@ export default function HistorySection() {
           scentTypeKey: null,
           scentTypeLabel: null,
           scentPrompt: null,
-          recommendedOilName: item.recommended_oil?.name || "不明",
+          recommendedOilName: item.recommended_oil?.name || item.recommended_oil_name || "不明",
           recommendedOilDescription: item.recommended_oil?.description || "",
           recommendedOilEffect: "",
           feedback: item.feedback || undefined,
@@ -211,7 +211,7 @@ export default function HistorySection() {
                       {formatDate(entry.createdAt)}
                     </p>
                     <p className="break-words text-base font-bold leading-relaxed sm:text-lg">
-                      おすすめ: {entry.recommendedOilName}
+                      おすすめ：（{entry.recommendedOilName}）
                     </p>
                   </div>
 
