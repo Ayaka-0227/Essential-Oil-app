@@ -2,6 +2,7 @@ require "test_helper"
 
 class Api::MentalCheckResultsControllerTest < ActionDispatch::IntegrationTest
   setup do
+    @oil = AromaOil.create!(name: "ラベンダー", description: "落ち着き")
     @user = User.create!(
       email: "api-user@example.com",
       name: "API User",
@@ -37,6 +38,31 @@ class Api::MentalCheckResultsControllerTest < ActionDispatch::IntegrationTest
     get api_mental_check_results_url, as: :json
 
     assert_response :unauthorized
+  end
+
+  test "create stores and returns recommended_oil_name" do
+    post api_mental_check_results_url,
+         headers: auth_headers_for(@user),
+         params: {
+           mental_check_result: {
+             stress: 2,
+             anxiety: 1,
+             fatigue: 2,
+             sleep: 1,
+             emotion: 2,
+             vitality: 1,
+             mood: 2,
+             concentration: 1,
+             recommended_oil_name: "ラベンダー"
+           }
+         },
+         as: :json
+
+    assert_response :created
+    body = JSON.parse(response.body)
+
+    assert_equal "ラベンダー", body["recommended_oil_name"]
+    assert_equal "ラベンダー", body.dig("recommended_oil", "name")
   end
 
   private

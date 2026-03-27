@@ -211,7 +211,7 @@ export default function HistorySection() {
                       {formatDate(entry.createdAt)}
                     </p>
                     <p className="break-words text-base font-bold leading-relaxed sm:text-lg">
-                      おすすめ：（{entry.recommendedOilName}）
+                      おすすめ：{entry.recommendedOilName}
                     </p>
                   </div>
 

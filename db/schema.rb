@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2026_03_22_123000) do
+ActiveRecord::Schema[8.0].define(version: 2026_03_27_130000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -37,6 +37,7 @@ ActiveRecord::Schema[8.0].define(version: 2026_03_22_123000) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "feedback"
+    t.string "recommended_oil_name"
     t.index ["recommended_oil_id"], name: "index_mental_check_results_on_recommended_oil_id"
     t.index ["user_id"], name: "index_mental_check_results_on_user_id"
   end
