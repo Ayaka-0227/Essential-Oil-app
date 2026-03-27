@@ -31,6 +31,14 @@ function formatDate(dateText: string) {
   }).format(date);
 }
 
+function toDuplicateSignature(item: MentalCheckHistoryEntry) {
+  return JSON.stringify({
+    recommendedOilName: item.recommendedOilName,
+    scores: item.scores,
+    feedback: item.feedback ?? null,
+  });
+}
+
 export default function HistorySection() {
   const [history, setHistory] = useState<MentalCheckHistoryEntry[]>([]);
   const [loading, setLoading] = useState(true);
@@ -79,7 +87,29 @@ export default function HistorySection() {
           recommendedOilEffect: "",
           feedback: item.feedback || undefined,
         }));
-        setHistory(converted);
+
+        const deduped = converted.filter((item, index, array) => {
+          const prev = array[index - 1];
+          if (!prev) {
+            return true;
+          }
+
+          const samePayload = toDuplicateSignature(item) === toDuplicateSignature(prev);
+          if (!samePayload) {
+            return true;
+          }
+
+          const itemTime = new Date(item.createdAt).getTime();
+          const prevTime = new Date(prev.createdAt).getTime();
+          if (Number.isNaN(itemTime) || Number.isNaN(prevTime)) {
+            return true;
+          }
+
+          // 同内容が短時間で連続保存された場合は表示上1件にまとめる
+          return Math.abs(prevTime - itemTime) > 30_000;
+        });
+
+        setHistory(deduped);
       }
     } catch {
       // エラー時は空のまま

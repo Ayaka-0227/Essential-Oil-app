@@ -7,7 +7,12 @@ class Api::MentalCheckResultsController < ApplicationController
   end
 
   def create
-    result = current_user.mental_check_results.new(mental_check_params)
+    attrs = mental_check_params.to_h
+    if attrs["recommended_oil_id"].blank? && recommended_oil_name.present?
+      attrs["recommended_oil_id"] = AromaOil.find_by(name: recommended_oil_name)&.id
+    end
+
+    result = current_user.mental_check_results.new(attrs)
 
     if result.save
       render json: result, include: :recommended_oil, status: :created
@@ -41,5 +46,9 @@ class Api::MentalCheckResultsController < ApplicationController
       :recommended_oil_id,
       :feedback
     )
+  end
+
+  def recommended_oil_name
+    params.dig(:mental_check_result, :recommended_oil_name)
   end
 end

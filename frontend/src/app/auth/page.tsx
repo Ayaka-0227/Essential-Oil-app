@@ -7,11 +7,11 @@ export default function AuthSelectPage() {
         <p className="mb-3 text-xs font-semibold uppercase tracking-[0.18em] text-teal-700">
           Mental Check
         </p>
-        <h1 className="mb-3 text-3xl font-semibold tracking-tight">はじめる方法を選択</h1>
+        <h1 className="mb-3 text-3xl font-semibold tracking-tight">はじめる</h1>
         <p className="mb-8 text-sm leading-relaxed text-stone-500">
-          メンタルチェック結果を保存するにはログインまたは新規登録が必要です。
+          メンタルチェックを行うにはログインが必要です。 
+          登録がまだの方は新規登録を行ってください。
         </p>
-
         <div className="space-y-4">
           <Link
             href="/login"

@@ -51,7 +51,20 @@ function RecommendationContent() {
     // サーバーに保存
     const saveToServer = async () => {
       const errorMsg = "サーバー保存に失敗しました";
+      const sessionSaveKey = `recommendation-save:${queryString}`;
       try {
+        if (typeof window !== "undefined") {
+          const status = window.sessionStorage.getItem(sessionSaveKey);
+          if (status === "done") {
+            setSaveMessage("結果は保存済みです");
+            return;
+          }
+          if (status === "saving") {
+            return;
+          }
+          window.sessionStorage.setItem(sessionSaveKey, "saving");
+        }
+
         const token = typeof window !== "undefined" ? localStorage.getItem("auth_token") : null;
         const res = await fetch(`${API_BASE_URL}/api/mental_check_results`, {
           method: "POST",
@@ -70,12 +83,23 @@ function RecommendationContent() {
               vitality: scores.vitality,
               mood: scores.mood,
               concentration: scores.concentration,
+              recommended_oil_name: finalOil.name,
               recommended_oil_id: null,
             },
           }),
         });
+        if (typeof window !== "undefined") {
+          if (res.ok) {
+            window.sessionStorage.setItem(sessionSaveKey, "done");
+          } else {
+            window.sessionStorage.removeItem(sessionSaveKey);
+          }
+        }
         setSaveMessage(res.ok ? "結果をサーバーに保存しました" : errorMsg);
       } catch {
+        if (typeof window !== "undefined") {
+          window.sessionStorage.removeItem(sessionSaveKey);
+        }
         setSaveMessage(errorMsg);
       }
     };
