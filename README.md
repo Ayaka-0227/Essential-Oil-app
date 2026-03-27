@@ -218,53 +218,6 @@ Q16 集中力の低下
 
 数値化  ◎: 1.0 / ○: 0.6 / △: 0.3 / -: 0.0  
 
-## SMTP設定（実メール配送）
-
-パスワードリセットの認証コードメールは、SMTP環境変数を設定すると実メール配送できます。
-
-必須環境変数:
-- MAILER_FROM
-- SMTP_ADDRESS
-- SMTP_PORT
-- SMTP_DOMAIN
-- SMTP_USERNAME
-- SMTP_PASSWORD
-- SMTP_AUTH
-- SMTP_STARTTLS
-
-SendGrid 例:
-
-export MAILER_FROM="no-reply@your-domain.com"
-export SMTP_ADDRESS="smtp.sendgrid.net"
-export SMTP_PORT="587"
-export SMTP_DOMAIN="your-domain.com"
-export SMTP_USERNAME="apikey"
-export SMTP_PASSWORD="YOUR_SENDGRID_API_KEY"
-export SMTP_AUTH="plain"
-export SMTP_STARTTLS="true"
-
-Resend SMTP 例:
-
-export MAILER_FROM="no-reply@your-domain.com"
-export SMTP_ADDRESS="smtp.resend.com"
-export SMTP_PORT="587"
-export SMTP_DOMAIN="your-domain.com"
-export SMTP_USERNAME="resend"
-export SMTP_PASSWORD="YOUR_RESEND_SMTP_PASSWORD"
-export SMTP_AUTH="plain"
-export SMTP_STARTTLS="true"
-
-Gmail SMTP 例（2段階認証 + アプリパスワード）:
-
-export MAILER_FROM="your.account@gmail.com"
-export SMTP_ADDRESS="smtp.gmail.com"
-export SMTP_PORT="587"
-export SMTP_DOMAIN="gmail.com"
-export SMTP_USERNAME="your.account@gmail.com"
-export SMTP_PASSWORD="YOUR_APP_PASSWORD"
-export SMTP_AUTH="plain"
-export SMTP_STARTTLS="true"
-
 上位カテゴリーに対して「◎」または「○」の適合度を持つオイルを候補として抽出する。  
 オイルスコア= Σ(カテゴリスコア×適合度)  
 
@@ -351,13 +304,13 @@ A.
 
 - ログイン・ログアウト機能
 
-- 管理者画面:アロマオイルのCRUD機能、ユーザー管理・検索機能、ストロングパラメータ
+- 管理者画面:アロマオイルのCRUD機能、ユーザー管理
 
 - MVPリリースまでに作る機能  
-メンタルチェック、レーダーチャート表示、おすすめアロマオイル1本表示、香りタイプ選択、質問文時のプログレス
+メンタルチェック、レーダーチャート表示、おすすめアロマオイル1本表示、香りタイプ選択、質問文時のプログレス、履歴保存 (日付、おすすめオイル、メンタルチェックの結果) 、簡単なフィードバック (良かった/普通/合わなかった)
 
 - 本リリースまでに作る機能  
-履歴保存 (日付、おすすめオイル、メンタルチェックの結果) 、簡単なフィードバック (良かった/普通/合わなかった)
+パスワードを忘れた方に向けてのメール送信機能、お問い合わせ、プライバシーポリシー、利用規約
 
 <br><br>
 
