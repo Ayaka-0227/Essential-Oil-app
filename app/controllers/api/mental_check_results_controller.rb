@@ -8,8 +8,13 @@ class Api::MentalCheckResultsController < ApplicationController
 
   def create
     attrs = mental_check_params.to_h
-    if attrs["recommended_oil_id"].blank? && recommended_oil_name.present?
-      attrs["recommended_oil_id"] = resolve_recommended_oil_id(recommended_oil_name)
+    normalized_name = normalized_recommended_oil_name
+    if normalized_name.present?
+      attrs["recommended_oil_name"] = normalized_name
+    end
+
+    if attrs["recommended_oil_id"].blank? && normalized_name.present?
+      attrs["recommended_oil_id"] = resolve_recommended_oil_id(normalized_name)
     end
 
     result = current_user.mental_check_results.new(attrs)
@@ -44,12 +49,17 @@ class Api::MentalCheckResultsController < ApplicationController
       :mood,
       :concentration,
       :recommended_oil_id,
+      :recommended_oil_name,
       :feedback
     )
   end
 
   def recommended_oil_name
     params.dig(:mental_check_result, :recommended_oil_name)
+  end
+
+  def normalized_recommended_oil_name
+    recommended_oil_name.to_s.squish
   end
 
   def resolve_recommended_oil_id(name)
