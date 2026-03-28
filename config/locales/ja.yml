@@ -1,0 +1,53 @@
+ja:
+  errors:
+    format: "%{attribute}%{message}"
+    messages:
+      accepted: "を同意してください"
+      blank: "を入力してください"
+      confirmation: "と%{attribute}の入力が一致しません"
+      empty: "を入力してください"
+      equal_to: "は%{count}にしてください"
+      even: "は偶数にしてください"
+      exclusion: "は予約されています"
+      greater_than: "は%{count}より大きい値にしてください"
+      greater_than_or_equal_to: "は%{count}以上の値にしてください"
+      inclusion: "は一覧にありません"
+      invalid: "は不正な値です"
+      less_than: "は%{count}より小さい値にしてください"
+      less_than_or_equal_to: "は%{count}以下の値にしてください"
+      not_a_number: "は数値で入力してください"
+      not_an_integer: "は整数で入力してください"
+      odd: "は奇数にしてください"
+      other_than: "は%{count}以外の値にしてください"
+      present: "は入力しないでください"
+      required: "を入力してください"
+      taken: "はすでに使用されています"
+      too_long:
+        one: "は%{count}文字以内で入力してください"
+        other: "は%{count}文字以内で入力してください"
+      too_short:
+        one: "は%{count}文字以上で入力してください"
+        other: "は%{count}文字以上で入力してください"
+      wrong_length:
+        one: "は%{count}文字で入力してください"
+        other: "は%{count}文字で入力してください"
+  activerecord:
+    errors:
+      messages:
+        record_invalid: "バリデーションに失敗しました: %{errors}"
+        restrict_dependent_destroy:
+          has_one: "%{record}が存在するので削除できません"
+          has_many: "%{record}が存在するので削除できません"
+    models:
+      user: "ユーザー"
+      aroma_oil: "アロマオイル"
+      mental_check_result: "メンタルチェック結果"
+    attributes:
+      user:
+        name: "氏名"
+        email: "メールアドレス"
+        password: "パスワード"
+        password_confirmation: "パスワード（確認）"
+        gender: "性別"
+        birth_date: "生年月日"
+        admin: "管理者"
