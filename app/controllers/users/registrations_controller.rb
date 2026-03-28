@@ -38,8 +38,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   def build_field_errors(resource)
-    resource.errors.messages.each_with_object({}) do |(attribute, messages), result|
-      result[attribute] = messages
+    resource.errors.each_with_object({}) do |error, result|
+      result[error.attribute.to_s] ||= []
+      result[error.attribute.to_s] << error.full_message
     end
   end
 end
