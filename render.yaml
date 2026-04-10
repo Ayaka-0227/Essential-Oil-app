@@ -6,6 +6,7 @@ services:
     repo: ./
     buildCommand: |
       bundle install
+      unset DATABASE_URL
       RAILS_ENV=production bundle exec rake assets:precompile
       RAILS_ENV=production bundle exec rake assets:clean
     startCommand: bundle exec puma -C config/puma.rb
