@@ -25,8 +25,6 @@ services:
         generateValue: true
       - key: RAILS_MASTER_KEY
         sync: false
-      - key: DATABASE_URL
-        sync: false
       - key: SUPABASE_DATABASE_URL
         sync: false
       - key: DB_PREPARED_STATEMENTS
