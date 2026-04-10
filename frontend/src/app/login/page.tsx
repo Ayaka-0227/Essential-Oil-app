@@ -4,6 +4,20 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { API_BASE_URL } from '@/lib/api';
 
+function translateAuthError(message: string): string {
+  const normalized = message.trim();
+
+  if (/invalid\s+email\s+or\s+password/i.test(normalized)) {
+    return 'メールアドレスまたはパスワードが正しくありません。';
+  }
+
+  if (/you\s+need\s+to\s+sign\s+in\s+or\s+sign\s+up\s+before\s+continuing/i.test(normalized)) {
+    return '続行するにはログインまたは新規登録してください。';
+  }
+
+  return normalized;
+}
+
 function EyeIcon() {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -43,7 +57,8 @@ export default function LoginPage() {
 
       if (!res.ok) {
         const data = await res.json().catch(() => ({}));
-        throw new Error(data.error ?? "ログインに失敗しました。");
+        const backendMessage = data.error ?? data.errors?.[0] ?? 'ログインに失敗しました。';
+        throw new Error(translateAuthError(backendMessage));
       }
 
       const data = await res.json();

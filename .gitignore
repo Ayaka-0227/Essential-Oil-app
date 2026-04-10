@@ -35,3 +35,11 @@
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
+
+# Ignore local database dumps and exported personal data.
+/backup.sql
+/data.sql
+/dump.sql
+/full.sql
+/users.csv
+/mental_check_results.csv

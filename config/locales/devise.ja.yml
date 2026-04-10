@@ -1,0 +1,63 @@
+ja:
+  devise:
+    confirmations:
+      confirmed: "メールアドレスが確認されました。"
+      send_instructions: "確認用のメールを数分以内に送信しました。"
+      send_paranoid_instructions: "該当するメールアドレスが存在する場合、確認用のメールを数分以内に送信しました。"
+    failure:
+      already_authenticated: "すでにログインしています。"
+      inactive: "アカウントが有効化されていません。"
+      invalid: "メールアドレスまたはパスワードが正しくありません。"
+      locked: "アカウントがロックされています。"
+      last_attempt: "アカウントがロックされるまで残り1回です。"
+      not_found_in_database: "メールアドレスまたはパスワードが正しくありません。"
+      timeout: "一定時間操作がなかったため、再度ログインしてください。"
+      unauthenticated: "続行するにはログインまたは新規登録してください。"
+      unconfirmed: "続行するにはメールアドレスの確認が必要です。"
+    mailer:
+      confirmation_instructions:
+        subject: "メールアドレス確認のご案内"
+      reset_password_instructions:
+        subject: "パスワード再設定のご案内"
+      unlock_instructions:
+        subject: "アカウントロック解除のご案内"
+      email_changed:
+        subject: "メールアドレス変更のお知らせ"
+      password_change:
+        subject: "パスワード変更のお知らせ"
+    omniauth_callbacks:
+      failure: "%{kind}アカウントでの認証に失敗しました（%{reason}）。"
+      success: "%{kind}アカウントで認証しました。"
+    passwords:
+      no_token: "このページには、パスワード再設定メールのリンクからアクセスしてください。"
+      send_instructions: "パスワード再設定の案内を数分以内に送信しました。"
+      send_paranoid_instructions: "該当するメールアドレスが存在する場合、パスワード再設定の案内を数分以内に送信しました。"
+      updated: "パスワードを変更しました。ログインしました。"
+      updated_not_active: "パスワードを変更しました。"
+    registrations:
+      destroyed: "アカウントを削除しました。"
+      signed_up: "新規登録が完了しました。"
+      signed_up_but_inactive: "新規登録は完了しましたが、アカウントが有効化されていないためログインできません。"
+      signed_up_but_locked: "新規登録は完了しましたが、アカウントがロックされているためログインできません。"
+      signed_up_but_unconfirmed: "確認メールを送信しました。メール内のリンクから有効化してください。"
+      update_needs_confirmation: "変更を保存しました。新しいメールアドレスの確認を完了してください。"
+      updated: "アカウント情報を更新しました。"
+      updated_but_not_signed_in: "パスワード変更のため、再ログインが必要です。"
+    sessions:
+      signed_in: "ログインしました。"
+      signed_out: "ログアウトしました。"
+      already_signed_out: "すでにログアウトしています。"
+    unlocks:
+      send_instructions: "ロック解除の案内を数分以内に送信しました。"
+      send_paranoid_instructions: "該当するアカウントが存在する場合、ロック解除の案内を数分以内に送信しました。"
+      unlocked: "アカウントのロックを解除しました。ログインしてください。"
+  errors:
+    messages:
+      already_confirmed: "はすでに確認済みです"
+      confirmation_period_expired: "は有効期限が切れました。再度リクエストしてください"
+      expired: "の有効期限が切れました。再度リクエストしてください"
+      not_found: "が見つかりません"
+      not_locked: "はロックされていません"
+      not_saved:
+        one: "1件のエラーにより保存できませんでした。"
+        other: "%{count}件のエラーにより保存できませんでした。"
