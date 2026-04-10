@@ -25,9 +25,13 @@ services:
       - key: RAILS_MASTER_KEY
         sync: false
       - key: DATABASE_URL
-        fromDatabase:
-          name: essential-oil-db
-          property: connectionString
+        sync: false
+      - key: SUPABASE_DATABASE_URL
+        sync: false
+      - key: DB_PREPARED_STATEMENTS
+        value: "false"
+      - key: DB_ADVISORY_LOCKS
+        value: "false"
 
   - type: web
     name: essential-oil-frontend
@@ -41,11 +45,6 @@ services:
         value: https://essential-oil-app.onrender.com
       - key: NODE_ENV
         value: production
-
-databases:
-  - name: essential-oil-db
-    engine: postgres
-    plan: free
 
 # Notes:
 # - Replace plan/repo/other fields as needed for your Render account.

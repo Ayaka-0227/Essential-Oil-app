@@ -7,7 +7,7 @@ class Users::SessionsController < Devise::SessionsController
     resource.ensure_admin_role!
     token = auth_token(resource)
     render json: {
-      message: "Logged in successfully.",
+      message: "ログインしました。",
       auth_token: token,
       user: {
         id: resource.id,
@@ -23,9 +23,9 @@ class Users::SessionsController < Devise::SessionsController
 
   def respond_to_on_destroy
     if current_user
-      render json: { message: "Logged out successfully." }, status: :ok
+      render json: { message: "ログアウトしました。" }, status: :ok
     else
-      render json: { message: "No active session." }, status: :unauthorized
+      render json: { message: "有効なセッションがありません。" }, status: :unauthorized
     end
   end
 end

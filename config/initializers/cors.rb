@@ -1,6 +1,6 @@
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
   allowed_origins = [
-    "http://localhost:3001",
+    /\Ahttp:\/\/(localhost|127\.0\.0\.1)(:\d+)?\z/,
     ENV["FRONTEND_APP_URL"].presence
   ].compact
 
