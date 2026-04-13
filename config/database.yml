@@ -22,7 +22,7 @@ default: &default
 
 development:
   <<: *default
-  url: <%= ENV["DATABASE_URL"].presence || ENV["SUPABASE_DATABASE_URL"].presence %>
+  url: <%= ENV["SUPABASE_DATABASE_URL"].presence || ENV["DATABASE_URL"].presence %>
   database: essential_oil_app_development
 
   # The specified database role being used to connect to PostgreSQL.
@@ -81,7 +81,7 @@ test:
 #
 production:
   <<: *default
-  url: <%= ENV["SUPABASE_DATABASE_URL"].presence %>
+  url: <%= ENV["SUPABASE_DATABASE_URL"].presence || ENV["DATABASE_URL"].presence %>
   # Supabase (PgBouncer) can require disabling prepared statements and advisory locks.
   prepared_statements: <%= ENV.fetch("DB_PREPARED_STATEMENTS", "false") == "true" %>
   advisory_locks: <%= ENV.fetch("DB_ADVISORY_LOCKS", "false") == "true" %>
