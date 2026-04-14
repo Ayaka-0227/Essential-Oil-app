@@ -11,7 +11,7 @@ services:
       RAILS_ENV=production bundle exec rake assets:clean
     startCommand: bundle exec puma -C config/puma.rb
     # Optional: run migrations automatically on deploy
-    releaseCommand: bin/rails db:migrate db:seed
+    releaseCommand: unset DATABASE_URL && bin/rails db:migrate db:seed
     envVars:
       - key: RAILS_ENV
         value: production
@@ -19,6 +19,8 @@ services:
         value: https://essential-oil-frontend.onrender.com
       - key: ADMIN_USER_EMAIL
         value: ayaka-1999.2.27song@ezweb.ne.jp
+      - key: ADMIN_USER_PASSWORD
+        sync: false
       - key: SECRET_KEY_BASE
         generateValue: true
       - key: DEVISE_JWT_SECRET_KEY

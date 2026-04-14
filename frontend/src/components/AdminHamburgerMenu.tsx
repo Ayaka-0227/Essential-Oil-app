@@ -97,6 +97,14 @@ export default function AdminHamburgerMenu() {
             ユーザー管理
           </button>
 
+          <button
+            type="button"
+            onClick={() => navigate("/admin/contact-inquiries")}
+            className="flex w-full items-center gap-2 rounded-xl px-4 py-2.5 text-sm font-medium text-stone-700 transition hover:bg-stone-50"
+          >
+            お問い合わせ管理
+          </button>
+
           {/* ログアウト */}
           <div className="pt-3 border-t border-stone-100 mt-3" />
 

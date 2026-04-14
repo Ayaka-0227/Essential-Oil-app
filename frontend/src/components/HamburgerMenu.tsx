@@ -87,6 +87,28 @@ export default function HamburgerMenu() {
 
           <button
             type="button"
+            onClick={() => {
+              setOpen(false);
+              router.push("/account");
+            }}
+            className="flex w-full items-center gap-3 rounded-xl px-4 py-3 text-sm font-semibold text-stone-700 transition hover:bg-stone-50"
+          >
+            アカウント
+          </button>
+
+          <button
+            type="button"
+            onClick={() => {
+              setOpen(false);
+              router.push("/contact");
+            }}
+            className="flex w-full items-center gap-3 rounded-xl px-4 py-3 text-sm font-semibold text-stone-700 transition hover:bg-stone-50"
+          >
+            お問い合わせ
+          </button>
+
+          <button
+            type="button"
             onClick={handleLogout}
             className="flex w-full items-center gap-3 rounded-xl px-4 py-3 text-sm font-semibold text-red-600 transition hover:bg-red-50"
           >

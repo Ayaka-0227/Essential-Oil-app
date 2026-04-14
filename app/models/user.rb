@@ -7,6 +7,7 @@ class User < ApplicationRecord
          :jwt_authenticatable,
          jwt_revocation_strategy: Devise::JWT::RevocationStrategies::Null
   has_many :mental_check_results
+  has_many :contact_inquiries, dependent: :destroy
 
   validates :name, presence: true
   validates :gender, inclusion: { in: %w[male female other] }

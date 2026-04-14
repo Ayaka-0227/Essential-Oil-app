@@ -29,6 +29,10 @@ function formatDate(value: string | null | undefined) {
 export default function AdminUsersPage() {
   const router = useRouter();
   const [users, setUsers] = useState<User[]>([]);
+  const [searchNameInput, setSearchNameInput] = useState("");
+  const [searchEmailInput, setSearchEmailInput] = useState("");
+  const [searchName, setSearchName] = useState("");
+  const [searchEmail, setSearchEmail] = useState("");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
@@ -37,7 +41,17 @@ export default function AdminUsersPage() {
     if (!token) { router.push("/login"); return; }
     if (localStorage.getItem("is_admin") !== "true") { router.push("/"); return; }
 
-    fetch(`${API_BASE_URL}/admin/users`, {
+    const nameQuery = searchName.trim();
+    const emailQuery = searchEmail.trim();
+    const searchParams = new URLSearchParams();
+    if (nameQuery) searchParams.set("name", nameQuery);
+    if (emailQuery) searchParams.set("email", emailQuery);
+    const endpoint = `${API_BASE_URL}/admin/users${searchParams.toString() ? `?${searchParams.toString()}` : ""}`;
+
+    setLoading(true);
+    setError("");
+
+    fetch(endpoint, {
       headers: { Authorization: `Bearer ${token}` },
     })
       .then((r) => {
@@ -48,7 +62,20 @@ export default function AdminUsersPage() {
       .then(setUsers)
       .catch((e) => setError(e.message))
       .finally(() => setLoading(false));
-  }, [router]);
+  }, [router, searchName, searchEmail]);
+
+  const handleSearch = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setSearchName(searchNameInput.trim());
+    setSearchEmail(searchEmailInput.trim());
+  };
+
+  const clearSearch = () => {
+    setSearchNameInput("");
+    setSearchEmailInput("");
+    setSearchName("");
+    setSearchEmail("");
+  };
 
   return (
     <main className="min-h-screen bg-[#f7f4ef] px-6 py-10 text-stone-800">
@@ -60,12 +87,53 @@ export default function AdminUsersPage() {
 
         <section className="rounded-2xl bg-white p-4 shadow-sm lg:p-5">
           <h2 className="mb-3 text-lg font-semibold">ユーザー一覧（新規登録順）</h2>
-          <p className="mb-4 text-xs text-stone-500">氏名を選択すると詳細ページへ移動します。</p>
+          <p className="mb-4 text-xs text-stone-500">氏名・メールアドレスを別々に指定して検索できます。氏名を選択すると詳細ページへ移動します。</p>
+
+          <form className="mb-4 flex items-end gap-2 overflow-x-auto" onSubmit={handleSearch}>
+            <input
+              type="text"
+              value={searchNameInput}
+              onChange={(e) => setSearchNameInput(e.target.value)}
+              placeholder="氏名で検索"
+              className="w-1/2 min-w-[180px] rounded-lg border border-stone-300 px-4 py-2.5 text-sm outline-none transition focus:border-teal-700"
+            />
+            <input
+              type="text"
+              value={searchEmailInput}
+              onChange={(e) => setSearchEmailInput(e.target.value)}
+              placeholder="メールアドレスで検索"
+              className="w-2/3 min-w-[220px] rounded-lg border border-stone-300 px-4 py-2.5 text-sm outline-none transition focus:border-teal-700"
+            />
+            <button
+              type="submit"
+              className="shrink-0 rounded-lg bg-teal-800 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-teal-900"
+            >
+              検索
+            </button>
+            <button
+              type="button"
+              onClick={clearSearch}
+              className="shrink-0 rounded-lg border border-stone-300 px-4 py-2.5 text-sm font-semibold text-stone-700 transition hover:border-teal-700 hover:text-teal-800"
+            >
+              クリア
+            </button>
+          </form>
+
+          {(searchName || searchEmail) && (
+            <p className="mb-4 text-xs text-stone-500">
+              検索条件: 氏名={searchName || "(未指定)"} / メール={searchEmail || "(未指定)"}
+            </p>
+          )}
 
           {loading ? (
             <p className="text-center text-sm text-stone-400">読み込み中...</p>
           ) : (
             <div className="space-y-3">
+              {users.length === 0 && (
+                <p className="rounded-lg border border-stone-200 bg-stone-50 px-4 py-3 text-sm text-stone-500">
+                  該当するユーザーが見つかりませんでした。
+                </p>
+              )}
               {users.map((user) => {
                 return (
                   <div

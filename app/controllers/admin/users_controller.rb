@@ -1,6 +1,18 @@
 class Admin::UsersController < Admin::BaseController
   def index
-    users = User.order(created_at: :desc).map do |u|
+    users_scope = User.order(created_at: :desc)
+
+    if params[:name].present?
+      name_keyword = ActiveRecord::Base.sanitize_sql_like(params[:name].to_s.strip)
+      users_scope = users_scope.where("name ILIKE ?", "%#{name_keyword}%")
+    end
+
+    if params[:email].present?
+      email_keyword = ActiveRecord::Base.sanitize_sql_like(params[:email].to_s.strip)
+      users_scope = users_scope.where("email ILIKE ?", "%#{email_keyword}%")
+    end
+
+    users = users_scope.map do |u|
       {
         id: u.id,
         name: u.name,
