@@ -16,11 +16,14 @@ Rails.application.routes.draw do
   root to: redirect(frontend_app_url.presence || "/up")
 
   namespace :api do
+    resource :account, only: [ :show, :update ]
+    resources :contact_inquiries, only: [ :create ]
     resources :mental_check_results, only: [ :index, :create, :show, :update ]
   end
 
   namespace :admin do
     resources :aroma_oils, only: [ :index, :create, :update, :destroy ]
+    resources :contact_inquiries, only: [ :index ]
     resources :users, only: [ :index, :show ]
   end
 end

@@ -44,16 +44,28 @@ ActiveRecord::Base.connection.execute(
 puts "AromaOils seeded: #{AromaOil.count}"
 
 # --- Admin User ---
-admin_email = ENV["ADMIN_USER_EMAIL"].to_s.strip
+admin_email = ENV["ADMIN_USER_EMAIL"].to_s.strip.downcase
+admin_password = ENV["ADMIN_USER_PASSWORD"].to_s
 
 if admin_email.present?
-  user = User.find_by(email: admin_email)
+  user = User.where("LOWER(email) = ?", admin_email).first
 
   if user
     user.update!(admin: true) unless user.admin?
     puts "Admin ensured: #{user.email}"
+  elsif admin_password.present?
+    user = User.create!(
+      email: admin_email,
+      password: admin_password,
+      password_confirmation: admin_password,
+      name: ENV.fetch("ADMIN_USER_NAME", "Admin User"),
+      gender: ENV.fetch("ADMIN_USER_GENDER", "other"),
+      birth_date: ENV.fetch("ADMIN_USER_BIRTH_DATE", "1990-01-01"),
+      admin: true
+    )
+    puts "Admin created: #{user.email}"
   else
-    puts "Admin user not found yet: #{admin_email}"
+    puts "Admin user not found and ADMIN_USER_PASSWORD is blank: #{admin_email}"
   end
 else
   puts "ADMIN_USER_EMAIL is blank. Skip admin seed."

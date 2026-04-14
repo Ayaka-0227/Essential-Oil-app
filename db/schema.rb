@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2026_03_27_130000) do
+ActiveRecord::Schema[8.0].define(version: 2026_04_15_093000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -21,6 +21,17 @@ ActiveRecord::Schema[8.0].define(version: 2026_03_27_130000) do
     t.datetime "updated_at", null: false
     t.string "category"
     t.string "scent_category"
+  end
+
+  create_table "contact_inquiries", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "subject", null: false
+    t.text "message", null: false
+    t.string "status", default: "new", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["created_at"], name: "index_contact_inquiries_on_created_at"
+    t.index ["user_id"], name: "index_contact_inquiries_on_user_id"
   end
 
   create_table "mental_check_results", force: :cascade do |t|
@@ -58,6 +69,7 @@ ActiveRecord::Schema[8.0].define(version: 2026_03_27_130000) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "contact_inquiries", "users"
   add_foreign_key "mental_check_results", "aroma_oils", column: "recommended_oil_id"
   add_foreign_key "mental_check_results", "users"
 end
