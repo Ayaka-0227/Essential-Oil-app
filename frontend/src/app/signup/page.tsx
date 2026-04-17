@@ -94,7 +94,7 @@ export default function SignupPage() {
       <div className="mx-auto w-full max-w-md rounded-2xl bg-white p-8 shadow-lg">
         <h1 className="mb-2 text-3xl font-semibold tracking-tight">新規登録</h1>
         <p className="mb-8 text-sm text-stone-500">
-          アカウントを作成をお願いします。
+          アカウントの作成をお願いします。
         </p>
 
         {error && (
