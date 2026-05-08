@@ -2,6 +2,7 @@
 
 import { Suspense, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
+import HamburgerMenu from "@/components/HamburgerMenu";
 import { SCENT_TYPES } from "@/lib/mental-check";
 
 function ScentContent() {
@@ -21,6 +22,7 @@ function ScentContent() {
 
   return (
     <main className="min-h-screen bg-[#f7f4ef] px-6 py-10 text-stone-800">
+      <HamburgerMenu />
       <div className="mx-auto w-full max-w-lg">
         <h1 className="mb-2 text-center text-2xl font-semibold tracking-tight">
           今日の気分に一番近い香りを選んでください。
@@ -50,7 +52,14 @@ function ScentContent() {
           })}
         </div>
 
-        <div className="mt-8 flex justify-end">
+        <div className="mt-8 flex justify-between">
+          <button
+            type="button"
+            onClick={() => router.back()}
+            className="rounded-full bg-stone-200 px-6 py-3 text-sm font-semibold text-stone-700 shadow transition-all hover:bg-stone-300 hover:scale-105 active:scale-95"
+          >
+            ←戻る
+          </button>
           <button
             type="button"
             onClick={handleNext}

@@ -70,8 +70,15 @@ function ResultContent() {
           </p>
         </div>
 
-        {/* next → ボタン */}
-        <div className="mt-8 flex justify-end">
+        {/* ナビゲーションボタン */}
+        <div className="mt-8 flex justify-between">
+          <button
+            type="button"
+            onClick={() => router.push("/check/questions")}
+            className="rounded-full bg-stone-200 px-6 py-3 text-sm font-semibold text-stone-700 shadow transition-all hover:bg-stone-300 hover:scale-105 active:scale-95"
+          >
+            ←戻る
+          </button>
           <button
             type="button"
             onClick={() => {
