@@ -193,11 +193,35 @@ function RecommendationContent() {
           </div>
         </div>
 
-        <div className="mt-8 flex justify-center">
+        <div className="mt-8 flex flex-nowrap items-center justify-start gap-2 overflow-x-auto pb-1 sm:justify-center">
+          <button
+            type="button"
+            onClick={() => router.push("/")}
+            className="whitespace-nowrap rounded-full bg-stone-200 px-5 py-3 text-sm font-semibold text-stone-700 shadow transition-all hover:bg-stone-300 hover:scale-105 active:scale-95"
+          >
+            ← TOPに戻る
+          </button>
+          <button
+            type="button"
+            onClick={() => {
+              if (typeof window !== "undefined") {
+                // sessionStorageをクリア
+                Object.keys(window.sessionStorage).forEach((key) => {
+                  if (key.startsWith("recommendation-save:")) {
+                    window.sessionStorage.removeItem(key);
+                  }
+                });
+              }
+              router.push("/check/questions");
+            }}
+            className="whitespace-nowrap rounded-full bg-teal-800 px-5 py-3 text-sm font-semibold text-white shadow transition-all hover:bg-teal-900 hover:scale-105 active:scale-95"
+          >
+            もう一度チェック
+          </button>
           <button
             type="button"
             onClick={() => router.push("/history")}
-            className="rounded-full bg-teal-800 px-8 py-3 text-sm font-semibold text-white shadow transition-all hover:bg-teal-900 hover:scale-105 active:scale-95"
+            className="whitespace-nowrap rounded-full border-2 border-teal-800 bg-white px-5 py-3 text-sm font-semibold text-teal-800 shadow transition-all hover:bg-teal-50 hover:scale-105 active:scale-95"
           >
             過去の結果を見る
           </button>

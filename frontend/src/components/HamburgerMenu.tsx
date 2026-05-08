@@ -107,6 +107,16 @@ export default function HamburgerMenu() {
             お問い合わせ
           </button>
 
+          <a
+            href="https://kiyac.app/privacypolicy/DxxnOeigZLkWBqpek7NB"
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={() => setOpen(false)}
+            className="flex w-full items-center gap-3 rounded-xl px-4 py-3 text-sm font-semibold text-stone-700 transition hover:bg-stone-50"
+          >
+            プライバシーポリシー
+          </a>
+
           <button
             type="button"
             onClick={handleLogout}
