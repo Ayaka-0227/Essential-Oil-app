@@ -7,10 +7,37 @@ import { API_BASE_URL } from "@/lib/api";
 export default function HamburgerMenu() {
   const [open, setOpen] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
+  const [unreadReplyCount, setUnreadReplyCount] = useState(0);
   const router = useRouter();
 
   useEffect(() => {
     setIsAdmin(localStorage.getItem("is_admin") === "true");
+
+    const token = localStorage.getItem("auth_token");
+    if (!token) return;
+
+    fetch(`${API_BASE_URL}/api/contact_inquiries/replies`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then((res) => {
+        if (!res.ok) throw new Error("Failed");
+        return res.json();
+      })
+      .then((data: { unread_count?: number }) => {
+        setUnreadReplyCount(data.unread_count ?? 0);
+      })
+      .catch(() => {
+        setUnreadReplyCount(0);
+      });
+
+    const handleRepliesRead = () => setUnreadReplyCount(0);
+    window.addEventListener("contact-replies-read", handleRepliesRead);
+
+    return () => {
+      window.removeEventListener("contact-replies-read", handleRepliesRead);
+    };
   }, []);
 
   const handleLogout = async () => {
@@ -40,6 +67,11 @@ export default function HamburgerMenu() {
         aria-label="メニューを開く"
         className="fixed right-4 top-4 z-40 flex h-10 w-10 flex-col items-center justify-center gap-[6px] rounded-full bg-white shadow-md transition hover:bg-stone-50"
       >
+        {unreadReplyCount > 0 && (
+          <span className="absolute -right-1 -top-1 flex h-5 w-5 items-center justify-center rounded-full bg-red-500 text-[10px] font-bold text-white">
+            {unreadReplyCount > 99 ? "99+" : unreadReplyCount}
+          </span>
+        )}
         <span className="block h-[2px] w-5 bg-stone-700" />
         <span className="block h-[2px] w-5 bg-stone-700" />
         <span className="block h-[2px] w-5 bg-stone-700" />
@@ -94,6 +126,22 @@ export default function HamburgerMenu() {
             className="flex w-full items-center gap-3 rounded-xl px-4 py-3 text-sm font-semibold text-stone-700 transition hover:bg-stone-50"
           >
             アカウント
+          </button>
+
+          <button
+            type="button"
+            onClick={() => {
+              setOpen(false);
+              router.push("/notifications");
+            }}
+            className="flex w-full items-center justify-between gap-3 rounded-xl px-4 py-3 text-sm font-semibold text-stone-700 transition hover:bg-stone-50"
+          >
+            <span>通知</span>
+            {unreadReplyCount > 0 && (
+              <span className="flex h-5 min-w-5 items-center justify-center rounded-full bg-red-500 px-1 text-[10px] font-bold text-white">
+                {unreadReplyCount > 99 ? "99+" : unreadReplyCount}
+              </span>
+            )}
           </button>
 
           <button

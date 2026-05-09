@@ -17,13 +17,20 @@ Rails.application.routes.draw do
 
   namespace :api do
     resource :account, only: [ :show, :update ]
-    resources :contact_inquiries, only: [ :create ]
+    resources :contact_inquiries, only: [ :create ] do
+      collection do
+        get :replies
+        patch :mark_replies_as_read
+      end
+    end
     resources :mental_check_results, only: [ :index, :create, :show, :update ]
   end
 
   namespace :admin do
     resources :aroma_oils, only: [ :index, :create, :update, :destroy ]
-    resources :contact_inquiries, only: [ :index ]
+    resources :contact_inquiries, only: [ :index ] do
+      patch :reply, on: :member
+    end
     resources :users, only: [ :index, :show ]
   end
 end
