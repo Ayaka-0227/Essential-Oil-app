@@ -63,7 +63,7 @@ export default function AdminContactInquiriesPage() {
       .then((data: ContactInquiry[]) => {
         setInquiries(data);
         setReplyDrafts(
-          Object.fromEntries(data.map((inquiry) => [inquiry.id, inquiry.admin_reply ?? ""]))
+          Object.fromEntries(data.map((inquiry) => [inquiry.id, ""]))
         );
       })
       .catch((e: unknown) => setError(e instanceof Error ? e.message : "取得に失敗しました"))
@@ -109,7 +109,7 @@ export default function AdminContactInquiriesPage() {
 
       const updatedInquiry = body as ContactInquiry;
       setInquiries((prev) => prev.map((item) => (item.id === inquiryId ? updatedInquiry : item)));
-      setReplyDrafts((prev) => ({ ...prev, [inquiryId]: updatedInquiry.admin_reply ?? "" }));
+      setReplyDrafts((prev) => ({ ...prev, [inquiryId]: "" }));
     } catch (e) {
       setSaveError(e instanceof Error ? e.message : "返信の保存に失敗しました");
     } finally {
@@ -187,7 +187,7 @@ export default function AdminContactInquiriesPage() {
                       disabled={savingId === inquiry.id}
                       className="rounded-full bg-teal-800 px-5 py-2 text-xs font-semibold text-white transition hover:bg-teal-900 disabled:cursor-not-allowed disabled:opacity-70"
                     >
-                      {savingId === inquiry.id ? "保存中..." : "返信を保存"}
+                      {savingId === inquiry.id ? "返信中..." : "返信する"}
                     </button>
                   </div>
                 </div>

@@ -36,32 +36,56 @@ export default function AdminUsersPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
+  const fetchUsers = async (token: string, nameValue: string, emailValue: string) => {
+    const nameQuery = nameValue.trim();
+    const emailQuery = emailValue.trim();
+    const searchParams = new URLSearchParams();
+    if (nameQuery) searchParams.set("name", nameQuery);
+    if (emailQuery) searchParams.set("email", emailQuery);
+    // Add a timestamp to avoid stale browser/proxy cache on admin list.
+    searchParams.set("_ts", Date.now().toString());
+    const endpoint = `${API_BASE_URL}/admin/users?${searchParams.toString()}`;
+
+    setLoading(true);
+    setError("");
+
+    try {
+      const response = await fetch(endpoint, {
+        headers: { Authorization: `Bearer ${token}` },
+        cache: "no-store",
+      });
+
+      if (response.status === 403) throw new Error("管理者権限が必要です");
+      if (!response.ok) throw new Error("取得に失敗しました");
+
+      const data = (await response.json()) as User[];
+      setUsers(data);
+    } catch (e: unknown) {
+      setError(e instanceof Error ? e.message : "取得に失敗しました");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
     const token = localStorage.getItem("auth_token");
     if (!token) { router.push("/login"); return; }
     if (localStorage.getItem("is_admin") !== "true") { router.push("/"); return; }
 
-    const nameQuery = searchName.trim();
-    const emailQuery = searchEmail.trim();
-    const searchParams = new URLSearchParams();
-    if (nameQuery) searchParams.set("name", nameQuery);
-    if (emailQuery) searchParams.set("email", emailQuery);
-    const endpoint = `${API_BASE_URL}/admin/users${searchParams.toString() ? `?${searchParams.toString()}` : ""}`;
+    void fetchUsers(token, searchName, searchEmail);
 
-    setLoading(true);
-    setError("");
+    const handleVisibilityOrFocus = () => {
+      if (document.visibilityState !== "visible") return;
+      void fetchUsers(token, searchName, searchEmail);
+    };
 
-    fetch(endpoint, {
-      headers: { Authorization: `Bearer ${token}` },
-    })
-      .then((r) => {
-        if (r.status === 403) throw new Error("管理者権限が必要です");
-        if (!r.ok) throw new Error("取得に失敗しました");
-        return r.json();
-      })
-      .then(setUsers)
-      .catch((e) => setError(e.message))
-      .finally(() => setLoading(false));
+    window.addEventListener("focus", handleVisibilityOrFocus);
+    document.addEventListener("visibilitychange", handleVisibilityOrFocus);
+
+    return () => {
+      window.removeEventListener("focus", handleVisibilityOrFocus);
+      document.removeEventListener("visibilitychange", handleVisibilityOrFocus);
+    };
   }, [router, searchName, searchEmail]);
 
   const handleSearch = (event: React.FormEvent<HTMLFormElement>) => {
