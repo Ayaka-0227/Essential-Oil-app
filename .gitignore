@@ -43,3 +43,6 @@
 /full.sql
 /users.csv
 /mental_check_results.csv
+
+# Ignore Windows ADS metadata files when they appear as plain files in WSL.
+*:Zone.Identifier
