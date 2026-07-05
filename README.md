@@ -315,15 +315,13 @@ A.
 <br><br>
 
 ## 使用する技術スタック
-- 使用するフレームワーク  
-Ruby on Rails 7.1 (API mode )   
-Next.js 14 (React)   
-ActiveAdmin 3.2  
-Chart.js 4.4  
-Devise 4.9
-
-- データベース  
-Supabase
-
-- デプロイ先  
-Render
+- バックエンド: Ruby 3.2.3
+　　　　　　　Ruby on Rails 8.0.2
+- フロントエンド: Next.js 14.2.5
+　　　　　　　　React 18.3.1
+　　　　　　　　Chart.js + react-chartjs-2
+- データベース: Supabase
+- テスト: Ruby側: Minitest, Capybara, Selenium
+        フロント側: Vitest, ESLint
+- インフラ（コンテナ）: Docker
+- デプロイ: Render
