@@ -323,14 +323,7 @@ Chart.js 4.4
 Devise 4.9
 
 - データベース  
-PostgreSQL18
+Supabase
 
 - デプロイ先  
 Render
-
-- 使用予定のライブラリ  
-axios 1.6.x  
-react-hoot-from 7.49.x  
-chart.js 4.4.x  
-react-chartjs-2 5.2.x  
-clsx 2.x
